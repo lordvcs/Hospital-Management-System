@@ -13,7 +13,9 @@ public class AboutUs
 		aboutus.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		aboutus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aboutus.setVisible(true);
-		
+		aboutus.setLayout(new BorderLayout());
+		aboutus.setContentPane(new JLabel(new ImageIcon("aboutus_image.jpg")));
+		aboutus.setLayout(new FlowLayout());
 		
 	}
 	
