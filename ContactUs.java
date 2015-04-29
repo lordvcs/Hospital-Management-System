@@ -10,11 +10,12 @@ public class ContactUs
 		JFrame contactus = new JFrame("About Us");
 		contactus.setLayout(null);
 		contactus.setSize(500,500);
-		contactus.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		// contactus.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		contactus.setExtendedState(contactus.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		contactus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contactus.setLayout(new BorderLayout());
-		contactus.setContentPane(new JLabel(new ImageIcon("aboutus_image.jpg")));
-		contactus.setLayout(new FlowLayout());
+		
+		// contactus.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		
 		contactus.setVisible(true);
 		
