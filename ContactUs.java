@@ -1,7 +1,6 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.*;
+
 
 public class ContactUs
 {
@@ -10,40 +9,80 @@ public class ContactUs
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		
-		//created contactusframe frame
+		//create contactusframe Jframe
 		JFrame contactusframe = new JFrame("Contact Us");
 		contactusframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		contactusframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contactusframe.setVisible(true);
 		contactusframe.setLayout(null);
-		//int width = contactusframe.getSize().width;
 		
-		//created headerpanel
+		
+		//creat headerpanel JPanel
 		JPanel headerpanel = new JPanel();
 		headerpanel.setLayout(null);
 		headerpanel.setBounds(5,5,screenSize.width-10,100);
 		headerpanel.setBackground(Color.cyan);
 		
-		//created jlabel for hospital name
-		JLabel heading = new JLabel("XXX Hospital");
-		heading.setFont(new Font("TimesNewRoman",Font.BOLD,40));
-		heading.setBackground(Color.red);
-		heading.setBounds(screenSize.width-550,30,500,50);
 		
-		//created jbutton for logo
+		//create JLabel for heading
+		JLabel heading = new JLabel("Hospital Heading");
+		heading.setFont(new Font("TimesNewRoman",Font.BOLD,40));
+		heading.setBounds(screenSize.width-(screenSize.width/4),30,500,50);
+		
+		
+		//create logo button JButton
 		JButton logo = new JButton();
 		logo.setBackground(Color.black);
-		ImageIcon icon = new ImageIcon("C:\\Users\\Sreeram\\Desktop\\Project\\Images\\logo.png");
+		ImageIcon icon = new ImageIcon("Images//logo.png");
 		Image img = icon.getImage();
 		Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
 		ImageIcon logoicon = new ImageIcon(newimg);
 		logo.setIcon(logoicon);
 		logo.setBounds(50,0,100,100);
 		
-		//adding components
+		
+		//create mainbodypanel JPanel
+		JPanel mainbodypanel = new JPanel();
+		mainbodypanel.setLayout(null);
+		mainbodypanel.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		mainbodypanel.setBackground(Color.black);
+		
+		//create map image
+		JLabel map = new JLabel();
+		map.setOpaque(true);
+		map.setBackground(Color.red);
+		map.setBounds(7*screenSize.width/10,15,350,350);
+		
+		//create address JLabel
+		JLabel address = new JLabel();
+		address.setOpaque(true);
+		address.setBackground(Color.white);
+		address.setBounds(10,10,screenSize.width/3,screenSize.height/3);
+		
+		//create email TextField
+		JTextField email = new JTextField();
+		email.setOpaque(true);
+		email.setBackground(Color.white);
+		email.setBounds(10,8*screenSize.height/20,screenSize.width/3,30);
+		
+		//create comments TextArea
+		JTextArea comments = new JTextArea(5,5);
+		comments.setOpaque(true);
+		comments.setBackground(Color.white);
+		comments.setBounds(10,screenSize.height/2,screenSize.width/3,100);
+		
+		
+		//add headerpanel
 		contactusframe.add(headerpanel);
 		headerpanel.add(heading);
 		headerpanel.add(logo);
+		
+		//add mainbodypanel
+		contactusframe.add(mainbodypanel);
+		mainbodypanel.add(map);
+		mainbodypanel.add(address);
+		mainbodypanel.add(email);
+		mainbodypanel.add(comments);
 		
 		
 	}
