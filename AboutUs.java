@@ -68,6 +68,13 @@ public class AboutUs
 		founder2.setBounds(8*screenSize.width/10,300,250,250);
 		
 		
+		//create JLabel for AboutUs text for mainbodypanel
+		JLabel aboutustext = new JLabel();
+		aboutustext.setOpaque(true);
+		aboutustext.setBackground(Color.white);
+		aboutustext.setBounds(100,100,screenSize.width/2,screenSize.height/2);
+		
+		
 		//add headerpanel
 		aboutusframe.add(headerpanel);
 		headerpanel.add(heading);
@@ -77,6 +84,7 @@ public class AboutUs
 		aboutusframe.add(mainbodypanel);
 		mainbodypanel.add(founder1);
 		mainbodypanel.add(founder2);
+		mainbodypanel.add(aboutustext);
 		
 		
 		
