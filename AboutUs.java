@@ -37,7 +37,7 @@ public class AboutUs
 		//create logo button JButton
 		JButton logo = new JButton();
 		logo.setBackground(Color.black);
-		ImageIcon icon = new ImageIcon("C:\\Users\\Sreeram\\hms\\Images\\logo.png");
+		ImageIcon icon = new ImageIcon("Images\\logo.png");
 		Image img = icon.getImage();
 		Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
 		ImageIcon logoicon = new ImageIcon(newimg);
