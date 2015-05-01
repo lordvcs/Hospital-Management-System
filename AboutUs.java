@@ -21,7 +21,7 @@ public class AboutUs
 		aboutusframe.setLayout(null);
 		//int width = aboutusframe.getSize().width;
 		
-		//creat headerpanel JPanel
+		//create headerpanel JPanel
 		JPanel headerpanel = new JPanel();
 		headerpanel.setLayout(null);
 		headerpanel.setBounds(5,5,screenSize.width-10,100);
@@ -37,11 +37,7 @@ public class AboutUs
 		//create logo button JButton
 		JButton logo = new JButton();
 		logo.setBackground(Color.black);
-<<<<<<< HEAD
-		ImageIcon icon = new ImageIcon("Images\\logo.png");
-=======
 		ImageIcon icon = new ImageIcon("Images//logo.png");
->>>>>>> 60cd1893a37b58042612c15d8e36abfe7a8e8d69
 		Image img = icon.getImage();
 		Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
 		ImageIcon logoicon = new ImageIcon(newimg);
