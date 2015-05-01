@@ -59,7 +59,13 @@ public class AboutUs
 		JLabel founder1 = new JLabel();
 		founder1.setOpaque(true);
 		founder1.setBackground(Color.red);
-		founder1.setBounds(3*screenSize.width/4,screenSize.height/2,150,150);
+		founder1.setBounds(8*screenSize.width/10,15,250,250);
+		
+		//create Founder2 image
+		JLabel founder2 = new JLabel();
+		founder2.setOpaque(true);
+		founder2.setBackground(Color.red);
+		founder2.setBounds(8*screenSize.width/10,300,250,250);
 		
 		
 		//add headerpanel
@@ -70,6 +76,7 @@ public class AboutUs
 		//add mainbodypanel
 		aboutusframe.add(mainbodypanel);
 		mainbodypanel.add(founder1);
+		mainbodypanel.add(founder2);
 		
 		
 		
