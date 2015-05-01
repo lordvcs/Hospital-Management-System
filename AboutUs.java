@@ -37,7 +37,11 @@ public class AboutUs
 		//create logo button JButton
 		JButton logo = new JButton();
 		logo.setBackground(Color.black);
+<<<<<<< HEAD
 		ImageIcon icon = new ImageIcon("Images\\logo.png");
+=======
+		ImageIcon icon = new ImageIcon("Images//logo.png");
+>>>>>>> 60cd1893a37b58042612c15d8e36abfe7a8e8d69
 		Image img = icon.getImage();
 		Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
 		ImageIcon logoicon = new ImageIcon(newimg);
@@ -45,10 +49,31 @@ public class AboutUs
 		logo.setBounds(50,0,100,100);
 		
 		
+		//create mainbodypanel JPanel
+		JPanel mainbodypanel = new JPanel();
+		mainbodypanel.setLayout(null);
+		mainbodypanel.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		mainbodypanel.setBackground(Color.black);
+		
+		//create mainbodypanel background image
+		// JLabel 
+		
+		
+		//create Founder1 image
+		JLabel founder1 = new JLabel();
+		founder1.setOpaque(true);
+		founder1.setBackground(Color.red);
+		founder1.setBounds(3*screenSize.width/4,screenSize.height/2,150,150);
+		
+		
+		//add headerpanel
 		aboutusframe.add(headerpanel);
 		headerpanel.add(heading);
 		headerpanel.add(logo);
 		
+		//add mainbodypanel
+		aboutusframe.add(mainbodypanel);
+		mainbodypanel.add(founder1);
 		
 		
 		
