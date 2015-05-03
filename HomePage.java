@@ -45,19 +45,28 @@ class HomePage
 		JPanel mainpanel = new JPanel();
 		mainpanel.setLayout(null);
 		mainpanel.setBackground(Color.YELLOW);
-		mainpanel.setBounds(5, 110, 500, 11000);
+		mainpanel.setBounds(20, 110, 850, 600);
 		
-		//create tester JLabel
-		JLabel tester = new JLabel("Hoasfadasgsfgspital Heading");
-		tester.setFont(new Font("TimesNewRoman",Font.BOLD,40));
-		tester.setBounds(screenSize.width-(screenSize.width/4),30,500,10000);
+		// LOGIN PANEL
+		JPanel loginpanel = new JPanel();	
+		loginpanel.setBounds(900, 110, 450, 600);
 		
+		JLabel loginlabel = new JLabel("LOGIN");
+		loginlabel.setBounds(40,40,300,100);
+		
+		
+			
+			
 		// ADD
 		headerpanel.add(logo);
 		headerpanel.add(heading);
-		mainpanel.add(tester);
+		
 		wrapper.add(headerpanel);
-		wrapper.add(mainpanel);		
+		wrapper.add(mainpanel);	
+		
+		loginpanel.add(loginlabel);
+		wrapper.add(loginpanel);
+		
 		homepageframe.add(wrapper);	
 				
 		homepageframe.pack();
