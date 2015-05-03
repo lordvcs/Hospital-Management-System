@@ -16,6 +16,11 @@ public class ContactUs
 		contactusframe.setVisible(true);
 		contactusframe.setLayout(null);
 		
+		//create Background Image for JFrame
+		JLabel bgimage = new JLabel(new ImageIcon("Images//death.jpg"));
+		
+		contactusframe.setContentPane(bgimage);
+		
 		
 		//creat headerpanel JPanel
 		JPanel headerpanel = new JPanel();
@@ -45,7 +50,7 @@ public class ContactUs
 		JPanel mainbodypanel = new JPanel();
 		mainbodypanel.setLayout(null);
 		mainbodypanel.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
-		mainbodypanel.setBackground(Color.black);
+		mainbodypanel.setBackground(new Color(0,0,0,0));
 		
 		//create map image
 		JLabel map = new JLabel();
@@ -59,11 +64,34 @@ public class ContactUs
 		address.setBackground(Color.white);
 		address.setBounds(10,10,screenSize.width/3,screenSize.height/3);
 		
+		//create email JLabel
+		String text = "Your Email ID :";
+		
+		JLabel emaillabel = new JLabel(text);
+		emaillabel.setFont(new Font("TimesNewRoman",Font.BOLD,17));
+		emaillabel.setForeground(Color.white);
+		
+		emaillabel.setOpaque(true);
+		emaillabel.setBackground(new Color(0,0,0,0));
+		emaillabel.setBounds(10,screenSize.height/3+15,screenSize.width/3,30);
+		
+		
 		//create email TextField
 		JTextField email = new JTextField();
 		email.setOpaque(true);
 		email.setBackground(Color.white);
-		email.setBounds(10,8*screenSize.height/20,screenSize.width/3,30);
+		email.setBounds(10,8*screenSize.height/20,screenSize.width/3,25);
+		
+		//create comments JLabel
+		String text1 = "Comments :";
+		
+		JLabel commentslabel = new JLabel(text1);
+		commentslabel.setFont(new Font("TimesNewRoman",Font.BOLD,17));
+		commentslabel.setForeground(Color.white);
+		
+		commentslabel.setOpaque(true);
+		commentslabel.setBackground(new Color(0,0,0,0));
+		commentslabel.setBounds(10,(8*screenSize.height/20)+50,screenSize.width/3,25);
 		
 		//create comments TextArea
 		JTextArea comments = new JTextArea(5,5);
@@ -82,6 +110,8 @@ public class ContactUs
 		mainbodypanel.add(map);
 		mainbodypanel.add(address);
 		mainbodypanel.add(email);
+		mainbodypanel.add(emaillabel);
+		mainbodypanel.add(commentslabel);
 		mainbodypanel.add(comments);
 		
 		

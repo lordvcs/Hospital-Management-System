@@ -70,9 +70,6 @@ public class AboutUs
 		founder1.setBackground(Color.red);
 		founder1.setBounds(8*screenSize.width/10,15,250,250);
 		
-		//JButton logo = new JButton();
-		//logo.setBackground(Color.black);
-		// ImageIcon icon = new ImageIcon("Images//logo.png");
 		
 		
 		
@@ -80,6 +77,13 @@ public class AboutUs
 		
 		//create Founder2 image
 		JLabel founder2 = new JLabel();
+				
+		ImageIcon iconfounder2 = new ImageIcon("Images//founder2.jpg");
+		Image imgfounder2 = iconfounder2.getImage();
+		Image newimg2 = imgfounder2.getScaledInstance(250, 250, Image.SCALE_SMOOTH ) ;  
+		ImageIcon logoicon2 = new ImageIcon(newimg2);
+		founder2.setIcon(logoicon2);
+		
 		founder2.setOpaque(true);
 		founder2.setBackground(Color.red);
 		founder2.setBounds(8*screenSize.width/10,300,250,250);
