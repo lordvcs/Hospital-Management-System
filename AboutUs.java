@@ -21,7 +21,7 @@ public class AboutUs
 		aboutusframe.setLayout(null);
 		
 		//create Background Image for JFrame
-		JLabel bgimage = new JLabel(new ImageIcon("Images//aboutus.jpg"));
+		JLabel bgimage = new JLabel(new ImageIcon("Images//homer.jpg"));
 		
 		aboutusframe.setContentPane(bgimage);
 		
@@ -34,9 +34,9 @@ public class AboutUs
 		
 		
 		//create JLabel for heading
-		JLabel heading = new JLabel("Hospital Heading");
+		JLabel heading = new JLabel("Simpsons Military Hospital");
 		heading.setFont(new Font("TimesNewRoman",Font.PLAIN,40));
-		heading.setBounds(screenSize.width-(screenSize.width/4),30,500,50);
+		heading.setBounds(screenSize.width/2,30,600,50);
 		
 		
 		//create logo button JButton
@@ -98,7 +98,7 @@ public class AboutUs
 		
 		
 		//create JLabel for AboutUs text for mainbodypanel
-		String text = "At McLean Hospital, our staff, faculty, students, volunteers and supporters are dedicated to improving the lives of people and families affected by psychiatric illness. As the largest psychiatric affiliate of Harvard Medical School, McLean has been meeting the needs of individuals and families with psychiatric illness since our founding in 1811. We are here to help you.";
+		String text = "At Simpsons Military Hospital, our staff, faculty, students, volunteers and supporters are dedicated to improving the lives of people and families affected by psychiatric illness. As the largest psychiatric affiliate of Harvard Medical School, McLean has been meeting the needs of individuals and families with psychiatric illness since our founding in 1811. We are here to help you.";
 		// JLabel aboutustext = new JLabel("<html>"+text+"</html>");
 		
 		JTextArea aboutustext = new JTextArea();
@@ -114,7 +114,7 @@ public class AboutUs
 		aboutustext.setBounds(100,100,screenSize.width/2,screenSize.height/2);
 		
 		
-		aboutusframe.pack();
+		//aboutusframe.pack();
 		
 		
 		//add headerpanel
