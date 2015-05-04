@@ -7,6 +7,7 @@ class HomePage
 {
     HomePage()
     {
+<<<<<<< HEAD
 //        try
 //        {
 //            Connection conn=DriverManager.getConnection(
@@ -24,6 +25,8 @@ class HomePage
 //        }
 
 
+=======
+>>>>>>> d314881e2142c9fae4b5ba2fc706393a703f9f1b
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         // HOME PAGE FRAME

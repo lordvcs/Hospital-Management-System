@@ -9,6 +9,7 @@ class MenuPage
     JTabbedPane tabbedPane;			
     JPanel mainbodypanel;
 	
+
     MenuPage()
     {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -90,7 +91,7 @@ class MenuPage
 
         try{           
             Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");     
+                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
             PreparedStatement pst = conn.prepareStatement("Select username from users");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
@@ -164,6 +165,8 @@ class MenuPage
         tabpane.add(panel3,"Doctor DB");
         tabpane.add(panel4,"Bill Payment");
         
+        menupageframe.pack();
+        
         //add mainbodypanel
         menupageframe.add(mainbodypanel);
     }
@@ -178,4 +181,10 @@ class MenuPage
                 }
         });
     }
-}
+
+}	
+    
+		
+		
+		
+    
