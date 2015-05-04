@@ -7,26 +7,7 @@ class HomePage
 {
     HomePage()
     {
-<<<<<<< HEAD
-//        try
-//        {
-//            Connection conn=DriverManager.getConnection(
-//                    "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");
-//            Statement s = conn.createStatement();
-//            ResultSet rs = s.executeQuery("SELECT * FROM users");
-//            while (rs.next()) 
-//            {
-//                System.out.println(rs.getString(2));
-//            }
-//        }
-//        catch(Exception e)
-//        {
-//            System.out.println(e);
-//        }
 
-
-=======
->>>>>>> d314881e2142c9fae4b5ba2fc706393a703f9f1b
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         // HOME PAGE FRAME
