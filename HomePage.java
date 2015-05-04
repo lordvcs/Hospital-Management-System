@@ -20,7 +20,24 @@ class HomePage
 		homepageframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		about = new JButton("About Us");
+		about.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				homepageframe.setVisible(false);
+				new AboutUs();
+			}
+		});
+		
 		contact = new JButton("Contact Us");		
+		contact.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				homepageframe.setVisible(false);
+				new ContactUs();
+			}
+		});
 		
 		about.setSize(20,20);
 		contact.setSize(40,40);
@@ -28,7 +45,7 @@ class HomePage
 		homepageframe.add(about);
 		homepageframe.add(contact);
 		
-		homepageframe.add(test);
+		//homepageframe.add(test);
 		
 		about.addActionListener (new ActionListener()
 		{

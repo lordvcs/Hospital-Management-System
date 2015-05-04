@@ -1,6 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
-
+import java.awt.event.*;
 
 public class ContactUs
 {
@@ -44,6 +44,15 @@ public class ContactUs
 		ImageIcon logoicon = new ImageIcon(newimg);
 		logo.setIcon(logoicon);
 		logo.setBounds(50,0,100,100);
+		
+		logo.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				contactusframe.setVisible(false);
+				new HomePage();
+			}
+		});
 		
 		
 		//create mainbodypanel JPanel
