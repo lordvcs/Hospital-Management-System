@@ -29,13 +29,13 @@ public class ContactUs
 		JPanel headerpanel = new JPanel();
 		headerpanel.setLayout(null);
 		headerpanel.setBounds(5,5,screenSize.width-10,100);
-		headerpanel.setBackground(Color.cyan);
+		headerpanel.setBackground(new Color(0,150,0));
 		
 		
 		//create JLabel for heading
-		JLabel heading = new JLabel("Hospital Heading");
+		JLabel heading = new JLabel("Simpsons Military Hospital");
 		heading.setFont(new Font("TimesNewRoman",Font.BOLD,40));
-		heading.setBounds(screenSize.width-(screenSize.width/4),30,500,50);
+		heading.setBounds(screenSize.width/2,30,600,50);
 		
 		
 		//create logo button JButton
