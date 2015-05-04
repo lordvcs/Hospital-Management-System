@@ -86,19 +86,22 @@ class MenuPage
 		panel2.setBackground(Color.green);
 		panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
 		
+		
 		JPanel panel3 = new JPanel();
 		panel3.setOpaque(true);
 		panel3.setBackground(Color.blue);
 		panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
 		
 		JPanel panel4 = new JPanel();
 		panel4.setOpaque(true);
 		panel4.setBackground(Color.yellow);
 		panel4.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
 		
+		
 		//add panels to tabpane
 		tabpane.setTabPlacement(SwingConstants.LEFT);
-		tabpane.add(panel1,"OutPatient");
+		tabpane.add(panel1,"<html>O<br>u<br>t<br>P<br>a<br>t<br>i<br>e<br>n<br>t</html>");
 		tabpane.add(panel2,"Patient DB");
 		tabpane.add(panel3,"Doctor DB");
 		tabpane.add(panel4,"Bill Payment");
