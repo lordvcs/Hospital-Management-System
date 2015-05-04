@@ -84,27 +84,72 @@ class MenuPage
         panel1.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel1.setLayout(null);
         
-        // FORM
+        // FORM start
         JPanel outform = new JPanel();
-        JLabel outlabel = new JLabel("OutPatient Form");
-        JTextField outname = new JTextField("Enter Name");
+        outform.setLayout(null);
+        outform.setBounds(310,30,600,520);
         
-        PreparedStatement pstmt = null;
-        try {
-          Connection conn=DriverManager.getConnection(
-                    "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+        JLabel outlabel = new JLabel("Enter Details of Out Patient");
+        outlabel.setBounds(240,30,300,40);
+        final JTextField outname = new JTextField("Enter Name");
+        outname.setBounds(150,90,300,40);
+        final JTextField outaddress = new JTextField("Enter Address");
+        outaddress.setBounds(150,150,300,40);
+        final JTextField outnumber = new JTextField("Enter Phone Number");
+        outnumber.setBounds(150,210,300,40);
+        final JTextField outage = new JTextField("Enter Age");
+        outage.setBounds(150,270,300,40);
+        final JTextField outsex = new JTextField("Enter Sex");
+        outsex.setBounds(150,330,300,40);
+        final JTextField outillness = new JTextField("Enter Illness");
+        outillness.setBounds(150,390,300,40);
+        JButton outbutton = new JButton("Submit");
+        outbutton.setBounds(160,450,250,40);
+        
+        outform.add(outlabel);
+        outform.add(outname);
+        outform.add(outname);
+        outform.add(outaddress);
+        outform.add(outnumber);
+        outform.add(outage);
+        outform.add(outsex);
+        outform.add(outillness);
+        outform.add(outbutton);
+        
+        panel1.add(outform);
+        // FORM end
+        
+        outbutton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                PreparedStatement pstmt = null;
+                try {
+                  Connection conn=DriverManager.getConnection(
+                            "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
 
-          String query = "insert into test(deptnum, deptname, deptloc) values(?, ?, ?)";
+                  String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
 
-          pstmt = conn.prepareStatement(query); // create a statement
-          pstmt.setInt(1, 1); // set input parameter 1
-          pstmt.setString(2, "deptname"); // set input parameter 2
-          pstmt.setString(3, "deptLocation"); // set input parameter 3
-          pstmt.executeUpdate(); // execute insert statement
-        } catch (Exception e) {
-          e.printStackTrace();
-        } 
-
+                  pstmt = conn.prepareStatement(query); // create a statement
+                  pstmt.setString(1, outname.getText()); // set input parameter 1
+                  pstmt.setString(2, outaddress.getText()); // set input parameter 2
+                  pstmt.setString(3, outnumber.getText()); // set input parameter 3
+                  pstmt.setString(4, outage.getText());
+                  pstmt.setString(5, outsex.getText());
+                  pstmt.setString(6, outillness.getText());
+                  pstmt.executeUpdate(); // execute insert statement
+                  JOptionPane.showMessageDialog(null, "Successfully entered details");
+                  new MenuPage();
+                  menupageframe.setVisible(false);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } 
+            }
+        });
+        
+        
+        
+        
 //        DefaultTableModel outpatientmodel = new DefaultTableModel();
 //        outpatientmodel.addColumn("id");   
 //        outpatientmodel.addColumn("First Name"); 
@@ -130,6 +175,8 @@ class MenuPage
 //        outpatientpane.setBounds(100,100,500,400);
 //        panel1.add(outpatientpane);
 //        panel1.setVisible(true);
+        
+        
         
         // OUTPATIENT end
         
