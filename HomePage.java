@@ -43,7 +43,29 @@ class HomePage
         logo.setBounds(50,0,100,100);
 
 
-
+        //FOOTER JPANEL
+        JButton aboutus = new JButton("About Us");
+        aboutus.setBounds((screenSize.width/2)-110,650,100,30);
+        aboutus.addActionListener(new ActionListener()
+        {
+           public void actionPerformed(ActionEvent ae)
+           {
+               new AboutUs();
+           }
+        });
+        wrapper.add(aboutus);
+        JButton contactus = new JButton("Contact Us");
+        contactus.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                new ContactUs();
+            }
+        });
+        contactus.setBounds((screenSize.width/2)+10,650,100,30);
+        wrapper.add(contactus);
+        
+        
 
         // MAIN CONTENT JPANEL
         JPanel mainpanel = new JPanel();
@@ -108,7 +130,10 @@ class HomePage
 
         wrapper.add(headerpanel);
         wrapper.add(mainpanel);	
-
+       
+        
+       
+        
         loginpanel.add(loginlabel);
         loginpanel.add(username);
         loginpanel.add(password);
