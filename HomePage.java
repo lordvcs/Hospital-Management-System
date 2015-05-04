@@ -1,11 +1,30 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.*;
 
 class HomePage 
 {
 	HomePage()
 	{
+            try
+            {
+                Connection conn=DriverManager.getConnection(
+                        "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");
+                Statement s = conn.createStatement();
+                ResultSet rs = s.executeQuery("SELECT * FROM users");
+                while (rs.next()) {
+                    System.out.println(rs.getString(2));
+}   
+            }
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
+               
+            
+            
+            
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		// HOME PAGE FRAME
@@ -18,7 +37,7 @@ class HomePage
 		JPanel wrapper = new JPanel();
 		// wrapper.setPreferredSize(new Dimension(800,600));
 		wrapper.setLayout(null);
-        wrapper.setBackground(Color.green);
+                wrapper.setBackground(Color.green);
 		
 		//create headerpanel JPanel
 		JPanel headerpanel = new JPanel();
@@ -48,12 +67,22 @@ class HomePage
 		mainpanel.setBounds(20, 110, 850, 600);
 		
 		// LOGIN PANEL
-		JPanel loginpanel = new JPanel();	
+		JPanel loginpanel = new JPanel();
+		loginpanel.setLayout(null);		
 		loginpanel.setBounds(900, 110, 450, 600);
 		
 		JLabel loginlabel = new JLabel("LOGIN");
-		loginlabel.setBounds(40,40,300,100);
+		loginlabel.setBounds(200,-20,300,100);
+		loginlabel.setFont(new Font("TimesNewRoman",Font.BOLD,18));
 		
+		JTextField username = new JTextField("Enter Username");
+		username.setBounds(100,50,300,50);
+		
+		JPasswordField password = new JPasswordField("Enter Password");
+		password.setBounds(100,160,300,50);
+		
+		JButton loginbutton = new JButton("LOGIN");
+		loginbutton.setBounds(150,290,200,100);
 		
 			
 			
@@ -63,8 +92,11 @@ class HomePage
 		
 		wrapper.add(headerpanel);
 		wrapper.add(mainpanel);	
-		
+				
 		loginpanel.add(loginlabel);
+		loginpanel.add(username);
+		loginpanel.add(password);
+		loginpanel.add(loginbutton);
 		wrapper.add(loginpanel);
 		
 		homepageframe.add(wrapper);	
