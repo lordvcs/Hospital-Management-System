@@ -50,7 +50,6 @@ class HomePage
 		heading.setFont(new Font("TimesNewRoman",Font.BOLD,40));
 		heading.setBounds(screenSize.width-(screenSize.width/4),30,500,50);
 		
-<<<<<<< HEAD
 		//create logo button JButton
 		JButton logo = new JButton();
 		logo.setBackground(Color.black);
@@ -60,8 +59,7 @@ class HomePage
 		ImageIcon logoicon = new ImageIcon(newimg);
 		logo.setIcon(logoicon);
 		logo.setBounds(50,0,100,100);
-=======
-		about = new JButton("About Us");
+		JButton about = new JButton("About Us");
 		about.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae)
@@ -71,7 +69,7 @@ class HomePage
 			}
 		});
 		
-		contact = new JButton("Contact Us");		
+		JButton contact = new JButton("Contact Us");		
 		contact.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae)
@@ -80,7 +78,6 @@ class HomePage
 				new ContactUs();
 			}
 		});
->>>>>>> 796103b8e347906f2744f9fc2970d701390a3b5b
 		
 		// MAIN CONTENT JPANEL
 		JPanel mainpanel = new JPanel();
@@ -93,13 +90,11 @@ class HomePage
 		loginpanel.setLayout(null);		
 		loginpanel.setBounds(900, 110, 450, 600);
 		
-<<<<<<< HEAD
 		JLabel loginlabel = new JLabel("LOGIN");
 		loginlabel.setBounds(200,-20,300,100);
 		loginlabel.setFont(new Font("TimesNewRoman",Font.BOLD,18));
-=======
+                
 		//homepageframe.add(test);
->>>>>>> 796103b8e347906f2744f9fc2970d701390a3b5b
 		
 		JTextField username = new JTextField("Enter Username");
 		username.setBounds(100,50,300,50);
