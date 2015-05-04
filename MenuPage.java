@@ -8,7 +8,7 @@ class MenuPage
 {
     JTabbedPane tabbedPane;			
     JPanel mainbodypanel;
-	
+    int i = 1;
 
     MenuPage()
     {
@@ -43,7 +43,7 @@ class MenuPage
         //create logo button JButton
         JButton logo = new JButton();
         logo.setBackground(Color.black);
-        ImageIcon icon = new ImageIcon("Images//logo.png");
+        ImageIcon icon = new ImageIcon("Images\\logo.png");
         Image img = icon.getImage();
         Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
         ImageIcon logoicon = new ImageIcon(newimg);
@@ -83,33 +83,100 @@ class MenuPage
         panel1.setOpaque(true);
         panel1.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel1.setLayout(null);
+        
+        // FORM start
+        JPanel outform = new JPanel();
+        outform.setLayout(null);
+        outform.setBounds(310,30,600,520);
+        
+        JLabel outlabel = new JLabel("Enter Details of Out Patient");
+        outlabel.setBounds(240,30,300,40);
+        final JTextField outname = new JTextField("Enter Name");
+        outname.setBounds(150,90,300,40);
+        final JTextField outaddress = new JTextField("Enter Address");
+        outaddress.setBounds(150,150,300,40);
+        final JTextField outnumber = new JTextField("Enter Phone Number");
+        outnumber.setBounds(150,210,300,40);
+        final JTextField outage = new JTextField("Enter Age");
+        outage.setBounds(150,270,300,40);
+        final JTextField outsex = new JTextField("Enter Sex");
+        outsex.setBounds(150,330,300,40);
+        final JTextField outillness = new JTextField("Enter Illness");
+        outillness.setBounds(150,390,300,40);
+        JButton outbutton = new JButton("Submit");
+        outbutton.setBounds(160,450,250,40);
+        
+        outform.add(outlabel);
+        outform.add(outname);
+        outform.add(outname);
+        outform.add(outaddress);
+        outform.add(outnumber);
+        outform.add(outage);
+        outform.add(outsex);
+        outform.add(outillness);
+        outform.add(outbutton);
+        
+        panel1.add(outform);
+        // FORM end
+        
+        outbutton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                PreparedStatement pstmt = null;
+                try {
+                  Connection conn=DriverManager.getConnection(
+                            "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
 
-        DefaultTableModel outpatientmodel = new DefaultTableModel();
-        outpatientmodel.addColumn("id");   
-//        outpatientmodel.addColumn("First Name");   
-//        outpatientmodel.addColumn("First Name");   
+                  String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
 
-        try{           
-            Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-            PreparedStatement pst = conn.prepareStatement("Select username from users");                
-            ResultSet rs = pst.executeQuery();                        
-            while(rs.next())
-            {   
-                int i = 1;
-                String name = rs.getString(1);
-                outpatientmodel.addRow(new Object[]{name});
-                i++;
+                  pstmt = conn.prepareStatement(query); // create a statement
+                  pstmt.setString(1, outname.getText()); // set input parameter 1
+                  pstmt.setString(2, outaddress.getText()); // set input parameter 2
+                  pstmt.setString(3, outnumber.getText()); // set input parameter 3
+                  pstmt.setString(4, outage.getText());
+                  pstmt.setString(5, outsex.getText());
+                  pstmt.setString(6, outillness.getText());
+                  pstmt.executeUpdate(); // execute insert statement
+                  JOptionPane.showMessageDialog(null, "Successfully entered details");
+                  new MenuPage();
+                  menupageframe.setVisible(false);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } 
             }
-            } 
-        catch(Exception e){
-            e.printStackTrace();                
-            } 
-        JTable outpatienttable = new JTable(outpatientmodel);
-        JScrollPane outpatientpane = new JScrollPane(outpatienttable);
-        outpatientpane.setBounds(100,100,500,400);
-        panel1.add(outpatientpane);
-        panel1.setVisible(true);
+        });
+        
+        
+        
+        
+//        DefaultTableModel outpatientmodel = new DefaultTableModel();
+//        outpatientmodel.addColumn("id");   
+//        outpatientmodel.addColumn("First Name"); 
+//
+//        try{           
+//            Connection conn=DriverManager.getConnection(
+//                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+//            PreparedStatement pst = conn.prepareStatement("Select username from users");                
+//            ResultSet rs = pst.executeQuery();                        
+//            while(rs.next())
+//            {   
+//                
+//                String name = rs.getString(1);
+//                outpatientmodel.addRow(new Object[]{i, name});
+//                i++;
+//            }
+//            } 
+//        catch(Exception e){
+//            e.printStackTrace();                
+//            } 
+//        JTable outpatienttable = new JTable(outpatientmodel);
+//        JScrollPane outpatientpane = new JScrollPane(outpatienttable);
+//        outpatientpane.setBounds(100,100,500,400);
+//        panel1.add(outpatientpane);
+//        panel1.setVisible(true);
+        
+        
         
         // OUTPATIENT end
         
@@ -118,34 +185,43 @@ class MenuPage
         panel2.setOpaque(true);
         panel2.setBackground(Color.green);
         panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+        panel2.setLayout(null);
         
-        
+        i=1;
         DefaultTableModel patientmodel = new DefaultTableModel();
-        outpatientmodel.addColumn("id");   
-//        outpatientmodel.addColumn("First Name");   
-//        outpatientmodel.addColumn("First Name");   
+        patientmodel.addColumn("id");   
+        patientmodel.addColumn("Name");   
+        patientmodel.addColumn("Address");   
+        patientmodel.addColumn("Age");   
+        patientmodel.addColumn("Phone Number");   
+        patientmodel.addColumn("Sex");   
+        patientmodel.addColumn("Illness");   
 
         try{           
             Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");     
-            PreparedStatement pst = conn.prepareStatement("Select username from users");                
+                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+            PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
-            {   
-                int i = 1;
-                String name = rs.getString(1);
-                patientmodel.addRow(new Object[]{name});
+            {                   
+                String name = rs.getString("PName");
+                String address = rs.getString("Address");
+                String phone = rs.getString("PNumber");
+                String age = rs.getString("Age");
+                String sex = rs.getString("Sex");
+                String illness = rs.getString("Illness");
+                patientmodel.addRow(new Object[]{i, name, address, phone, age, sex, illness});
                 i++;
             }
             } 
         catch(Exception e){
             e.printStackTrace();                
             } 
-        JTable patienttable = new JTable(outpatientmodel);
-        JScrollPane patientpane = new JScrollPane(outpatienttable);
-        outpatientpane.setBounds(100,100,500,400);
-        panel1.add(outpatientpane);
-        panel1.setVisible(true);
+        JTable patienttable = new JTable(patientmodel);
+        JScrollPane patientpane = new JScrollPane(patienttable);
+        patientpane.setBounds(10,10,1240,550);
+        panel2.add(patientpane);
+        panel2.setVisible(true);
         // PATIENT DB END
 
         JPanel panel3 = new JPanel();
@@ -165,7 +241,7 @@ class MenuPage
         tabpane.add(panel3,"Doctor DB");
         tabpane.add(panel4,"Bill Payment");
         
-        menupageframe.pack();
+//        menupageframe.pack();
         
         //add mainbodypanel
         menupageframe.add(mainbodypanel);
