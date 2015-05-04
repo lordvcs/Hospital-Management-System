@@ -1,9 +1,12 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.*;
 
 public class ContactUs
 {
+    JTextArea comments;
+    JTextField email;
 	ContactUs()
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -86,11 +89,12 @@ public class ContactUs
 		
 		
 		//create email TextField
-		JTextField email = new JTextField();
+		email = new JTextField();
 		email.setOpaque(true);
 		email.setBackground(Color.white);
 		email.setBounds(10,8*screenSize.height/20,screenSize.width/3,25);
 		
+                
 		//create comments JLabel
 		String text1 = "Comments :";
 		
@@ -103,12 +107,39 @@ public class ContactUs
 		commentslabel.setBounds(10,(8*screenSize.height/20)+50,screenSize.width/3,25);
 		
 		//create comments TextArea
-		JTextArea comments = new JTextArea(5,5);
+		comments = new JTextArea(5,5);
 		comments.setOpaque(true);
 		comments.setBackground(Color.white);
 		comments.setBounds(10,screenSize.height/2,screenSize.width/3,100);
 		
+		//create submit button
+                JButton submit = new JButton("Submit");
+                submit.setBounds(10,(3*screenSize.height/5)+30,100,30);
 		
+		submit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				Statement stm;
+				
+				
+				try
+				{
+					Connection connect=DriverManager.getConnection("jdbc:ucanaccess:Database//contactus.accdb"); 
+                                        stm = connect.createStatement();
+                                        PreparedStatement ps = connect.prepareStatement("insert into contactus values(?,?)");
+                                        ps.setString( 1, email.getText() );
+                                        ps.setString( 2, comments.getText() );
+                                        int rst =ps.executeUpdate(); 
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					
+				}
+			}
+		});
+                
 		//add headerpanel
 		contactusframe.add(headerpanel);
 		headerpanel.add(heading);
@@ -122,7 +153,7 @@ public class ContactUs
 		mainbodypanel.add(emaillabel);
 		mainbodypanel.add(commentslabel);
 		mainbodypanel.add(comments);
-		
+		mainbodypanel.add(submit);
 		
 	}
 	
