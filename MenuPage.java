@@ -4,6 +4,12 @@ import javax.swing.*;
 
 class MenuPage 
 {
+			JTabbedPane tabbedPane;
+			JPanel		panel1;
+			JPanel		panel2;
+			JPanel		panel3;
+			JPanel mainbodypanel;
+	
 	MenuPage()
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -52,24 +58,65 @@ class MenuPage
 			}
 		});
 		
-		//create mainbodypanel JPanel
-		JPanel mainbodypanel = new JPanel();
-		mainbodypanel.setLayout(null);
-		mainbodypanel.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
-		mainbodypanel.setBackground(new Color(0,0,0,0));
-		
-		menupageframe.pack();
-			
 		//add headerpanel
 		menupageframe.add(headerpanel);
 		headerpanel.add(heading);
 		headerpanel.add(logo);
 		
+		
+		//create mainbodypanel JPanel
+		mainbodypanel = new JPanel();
+		mainbodypanel.setLayout(null);
+		mainbodypanel.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		mainbodypanel.setBackground(new Color(255,255,255,255));
+		
+		
+		//create Jtabbedpane
+		JTabbedPane tabpane = new JTabbedPane();
+		tabpane.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		menupageframe.add(tabpane);
+		
+		JPanel panel1 = new JPanel();
+		panel1.setBackground(Color.red);
+		panel1.setOpaque(true);
+		panel1.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
+		JPanel panel2 = new JPanel();
+		panel2.setOpaque(true);
+		panel2.setBackground(Color.green);
+		panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
+		JPanel panel3 = new JPanel();
+		panel3.setOpaque(true);
+		panel3.setBackground(Color.blue);
+		panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
+		JPanel panel4 = new JPanel();
+		panel4.setOpaque(true);
+		panel4.setBackground(Color.yellow);
+		panel4.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
+		//add panels to tabpane
+		tabpane.setTabPlacement(SwingConstants.LEFT);
+		tabpane.add(panel1,"OutPatient");
+		tabpane.add(panel2,"Patient DB");
+		tabpane.add(panel3,"Doctor DB");
+		tabpane.add(panel4,"Bill Payment");
+		
+		menupageframe.pack();
+			
+		
+		
 		//add mainbodypanel
 		menupageframe.add(mainbodypanel);
 		
 		
+		
+		
 	}
+	
+	
+	
 	
 	public static void main(String a[])
 	{
