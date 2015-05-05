@@ -89,27 +89,27 @@ class Edit
              // EDITFORM
                     
 
-                    JTextField namefield = new JTextField(name);
+                    final JTextField namefield = new JTextField(name);
                     namefield.setBounds(200,10,250,40);
                     formpanel.add(namefield);
 
-                    JTextField addressfield = new JTextField(address);
+                    final JTextField addressfield = new JTextField(address);
                     addressfield.setBounds(200,70,250,40);
                     formpanel.add(addressfield);
 
-                    JTextField phonefield = new JTextField(phone);
+                    final JTextField phonefield = new JTextField(phone);
                     phonefield.setBounds(200,120,250,40);
                     formpanel.add(phonefield);
 
-                    JTextField agefield = new JTextField(age);
+                    final JTextField agefield = new JTextField(age);
                     agefield.setBounds(200,170,250,40);
                     formpanel.add(agefield);
 
-                    JTextField sexfield = new JTextField(sex);
+                    final JTextField sexfield = new JTextField(sex);
                     sexfield.setBounds(200,220,250,40);
                     formpanel.add(sexfield);
 
-                    JTextField illnessfield = new JTextField(illness);
+                    final JTextField illnessfield = new JTextField(illness);
                     illnessfield.setBounds(200,270,250,40);
                     formpanel.add(illnessfield);
 
@@ -124,7 +124,7 @@ class Edit
                     
                     
                     // SECOND ONCLICK
-                    outbutton.addActionListener(new ActionListener()
+                    formeditbutton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ae)
             {
@@ -136,16 +136,16 @@ class Edit
                   String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
 
                   pstmt = conn.prepareStatement(query); // create a statement
-                  pstmt.setString(1, outname.getText()); // set input parameter 1
-                  pstmt.setString(2, outaddress.getText()); // set input parameter 2
-                  pstmt.setString(3, outnumber.getText()); // set input parameter 3
-                  pstmt.setString(4, outage.getText());
-                  pstmt.setString(5, outsex.getText());
-                  pstmt.setString(6, outillness.getText());
+                  pstmt.setString(1, namefield.getText()); // set input parameter 1
+                  pstmt.setString(2, addressfield.getText()); // set input parameter 2
+                  pstmt.setString(3, phonefield.getText()); // set input parameter 3
+                  pstmt.setString(4, agefield.getText());
+                  pstmt.setString(5, sexfield.getText());
+                  pstmt.setString(6, illnessfield.getText());
                   pstmt.executeUpdate(); // execute insert statement
                   JOptionPane.showMessageDialog(null, "Successfully entered details");
-                  new MenuPage();
-                  menupageframe.setVisible(false);
+                  
+                  
                 } catch (Exception e) {
                   e.printStackTrace();
                 } 
