@@ -21,7 +21,7 @@ public class AboutUs
 		aboutusframe.setLayout(null);
 		
 		//create Background Image for JFrame
-		JLabel bgimage = new JLabel(new ImageIcon("Images//homer.jpg"));
+		JLabel bgimage = new JLabel(new ImageIcon("Images//aboutus.jpg"));
 		
 		aboutusframe.setContentPane(bgimage);
 		

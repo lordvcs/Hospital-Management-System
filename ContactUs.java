@@ -66,6 +66,11 @@ public class ContactUs
 
         //create map image
         JLabel map = new JLabel();
+		ImageIcon icon_map = new ImageIcon("Images//map.jpg");
+        Image img_map = icon_map.getImage();
+        Image newimg_map = img_map.getScaledInstance(350, 350, Image.SCALE_SMOOTH ) ;  
+        ImageIcon logoicon_map = new ImageIcon(newimg_map);
+        map.setIcon(logoicon_map);
         map.setOpaque(true);
         map.setBackground(Color.red);
         map.setBounds(7*screenSize.width/10,15,350,350);

@@ -50,6 +50,7 @@ class HomePage
         {
            public void actionPerformed(ActionEvent ae)
            {
+			   homepageframe.setVisible(false);
                new AboutUs();
            }
         });
@@ -59,6 +60,7 @@ class HomePage
         {
             public void actionPerformed(ActionEvent ae)
             {
+				homepageframe.setVisible(false);
                 new ContactUs();
             }
         });
