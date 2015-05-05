@@ -313,4 +313,8 @@ class MenuPage
         });
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e39637d694ccde09da95fc6897011af62663ed9f
