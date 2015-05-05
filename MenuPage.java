@@ -71,7 +71,7 @@ class MenuPage
         mainbodypanel = new JPanel();
         mainbodypanel.setLayout(null);
         mainbodypanel.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
-        //mainbodypanel.setBackground(new Color(255,255,255,255));
+        mainbodypanel.setBackground(new Color(255,255,255,255));
 
 
         //create Jtabbedpane
@@ -81,7 +81,7 @@ class MenuPage
 
         // OUTPATIENT start
         JPanel panel1 = new JPanel();
-        //panel1.setBackground(Color.red);
+        panel1.setBackground(Color.red);
         panel1.setOpaque(true);
         panel1.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel1.setLayout(null);
@@ -160,7 +160,7 @@ class MenuPage
         // PATIENT DB START
         JPanel panel2 = new JPanel();
         panel2.setOpaque(true);
-        //panel2.setBackground(Color.green);
+        panel2.setBackground(Color.green);
         panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel2.setLayout(null);
         
@@ -208,7 +208,7 @@ class MenuPage
         JPanel panel3 = new JPanel();
         panel3.setOpaque(true);
         panel3.setLayout(null);
-        //panel3.setBackground(Color.blue);
+        panel3.setBackground(Color.blue);
         panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         
         
@@ -255,12 +255,12 @@ class MenuPage
 		JPanel panel4 = new JPanel();
 		panel4.setLayout(null);
         panel4.setOpaque(true);
-        //panel4.setBackground(Color.yellow);
+        panel4.setBackground(Color.yellow);
         panel4.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
 		
 		JPanel bill_entry = new JPanel();
 		bill_entry.setLayout(null);
-		//bill_entry.setBackground(Color.red);
+		bill_entry.setBackground(Color.red);
 		bill_entry.setBounds(5,5,2*(screenSize.width-10)/5,screenSize.height-(screenSize.height/3));
 		
 		JTextField patient_name = new JTextField("Patient Name");
