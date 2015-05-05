@@ -164,7 +164,7 @@ class MenuPage
         panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel2.setLayout(null);
         
-        i=1;
+        
         DefaultTableModel patientmodel = new DefaultTableModel();
         patientmodel.addColumn("id");   
         patientmodel.addColumn("Name");   
@@ -180,15 +180,16 @@ class MenuPage
             PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
-            {                   
+            {   
+                String id = rs.getString("id");
                 String name = rs.getString("PName");
                 String address = rs.getString("Address");
                 String phone = rs.getString("PNumber");
                 String age = rs.getString("Age");
                 String sex = rs.getString("Sex");
                 String illness = rs.getString("Illness");
-                patientmodel.addRow(new Object[]{i, name, address, phone, age, sex, illness});
-                i++;
+                patientmodel.addRow(new Object[]{id, name, address, phone, age, sex, illness});
+                
             }
             } 
         catch(Exception e){
@@ -201,10 +202,52 @@ class MenuPage
         panel2.setVisible(true);
         // PATIENT DB END
 
+        
+        
+        // DOCOTORS DB start
         JPanel panel3 = new JPanel();
         panel3.setOpaque(true);
+        panel3.setLayout(null);
         panel3.setBackground(Color.blue);
         panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+        
+        
+        
+        DefaultTableModel doctormodel = new DefaultTableModel();
+        doctormodel.addColumn("id");   
+        doctormodel.addColumn("Name");   
+        doctormodel.addColumn("Specialisation");   
+        doctormodel.addColumn("Address");   
+        doctormodel.addColumn("Phone Number");  
+
+        try{           
+            Connection conn=DriverManager.getConnection(
+                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+            PreparedStatement pst = conn.prepareStatement("Select * from doctors");                
+            ResultSet rs = pst.executeQuery();                        
+            while(rs.next())
+            {   
+                String id = rs.getString("id");
+                String name = rs.getString("DocName");  
+                String specialisation = rs.getString("Specialisation");
+                String address = rs.getString("Address");
+                String age = rs.getString("PNumber");
+                doctormodel.addRow(new Object[]{id, name, specialisation, address, age});
+                
+            }
+            } 
+        catch(Exception e){
+            e.printStackTrace();                
+            } 
+        JTable doctortable = new JTable(doctormodel);
+        JScrollPane doctorpane = new JScrollPane(doctortable);
+        doctorpane.setBounds(10,10,1240,550);
+        panel3.add(doctorpane);
+        panel3.setVisible(true);
+        
+        // DOCOTORS DB end
+        
+        
 
         
 		//BILL PAYMENT JPANEL
@@ -270,9 +313,4 @@ class MenuPage
         });
     }
 
-}	
-    
-		
-		
-		
-    
+}
