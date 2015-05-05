@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.border.BevelBorder;
 
 class Edit 
 {
@@ -18,30 +19,97 @@ class Edit
         JPanel editpane;
                 
 	Edit()
-	{
-		JFrame editframe = new JFrame("Edit");
-		editframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        editframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		editframe.setLayout(null);
-		
-		editpane = new JPanel();
-		editpane.setLayout(null);
-		editpane.setBounds(5,5,900,200);
-		
-		final JTextField idfield = new JTextField("Enter ID");
-		idfield.setBounds(500,50,150,30);
-		JButton editbutton = new JButton("Edit");
-		editbutton.setBounds(650,50,150,30);
-		
-		editpane.add(idfield);
-		editpane.add(editbutton);
-		
-		editframe.add(editpane);
-                
-                
-                    formpanel = new JPanel();
-                    formpanel.setBounds(400,250,600,900);		
-                    formpanel.setLayout(null);
+	{   
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            
+            
+            JFrame editframe = new JFrame("Edit");
+            editframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            editframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            editframe.setLayout(null);
+            
+            
+            // CREATE HEADERPANEL JPANEL
+            JPanel headerpanel = new JPanel();
+            headerpanel.setLayout(null);
+            headerpanel.setBounds(10,10,screenSize.width-20,100);
+            //headerpanel.setBackground(Color.cyan);
+            headerpanel.setBorder(new BevelBorder(BevelBorder.RAISED)); 
+            
+            // CREATE HEADERPANELSH JPANEL
+            JPanel headerpanelsh = new JPanel();
+            headerpanelsh.setLayout(null);
+            headerpanelsh.setBounds(16,16,screenSize.width-20,100);
+            headerpanelsh.setBackground(new Color(200, 200, 200));            
+            
+            // CREATE HEADING JLABEL
+            JLabel heading = new JLabel("SIMPSONS MILITARY HOSPITAL");
+            Font font = new Font("Garamond", Font.BOLD, 35);
+            heading.setFont(font);
+            heading.setForeground(new Color(0, 255, 226));            
+            heading.setBounds(screenSize.width-700,40,700,45);
+            
+            JLabel heading1 = new JLabel("SIMPSONS MILITARY HOSPITAL");
+            Font font1 = new Font("Garamond", Font.BOLD, 35);
+            heading1.setFont(font1);
+            heading1.setForeground(new Color(0, 126, 112));            
+            heading1.setBounds(screenSize.width-702,42,700,45);
+            
+  
+            
+            ImageIcon image = new ImageIcon("C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Images\\logo.png");
+            JLabel label = new JLabel("", image, JLabel.CENTER);
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add( label, BorderLayout.CENTER );
+            panel.setBounds(50,15,100,90);
+            
+            //FOOTER JPANEL
+            JButton aboutus = new JButton("About Us");
+            aboutus.setBounds((screenSize.width/2)-110,650,100,30);
+            aboutus.addActionListener(new ActionListener()
+            {
+               public void actionPerformed(ActionEvent ae)
+               {
+                   new AboutUs();
+               }
+            });
+            editframe.add(aboutus);
+            JButton contactus = new JButton("Contact Us");
+            contactus.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    new ContactUs();
+                }
+            });
+            contactus.setBounds((screenSize.width/2)+10,650,100,30);
+            editframe.add(contactus);
+            
+            editpane = new JPanel();
+            editpane.setLayout(null);
+            editpane.setBounds(500,120,400,200);
+
+            final JTextField idfield = new JTextField("Enter ID");
+            idfield.setBounds(10,10,150,30);
+            JButton editbutton = new JButton("Edit");
+            editbutton.setBounds(170,10,150,30);
+
+            editpane.add(idfield);
+            editpane.add(editbutton);
+
+            editframe.add(editpane);
+            editframe.add(panel);
+            editframe.add(heading);
+            editframe.add(heading1);
+            editframe.add(headerpanel);
+            editframe.add(headerpanelsh);
+            
+            
+
+
+            formpanel = new JPanel();
+            formpanel.setBounds(350,150,600,900);		
+            formpanel.setLayout(null);
                 
 		
             editbutton.addActionListener(new ActionListener()
@@ -76,12 +144,8 @@ class Edit
         });
                 
            editframe.add(formpanel);     
-                
-                    
 		
-		
-		
-		editframe.setVisible(true);
+            editframe.setVisible(true);
 	}
         
         public void editform(String name, String address, String phone, String age, String sex, String illness, final int a)
@@ -90,31 +154,31 @@ class Edit
                     
 
                     final JTextField namefield = new JTextField(name);
-                    namefield.setBounds(200,10,250,40);
+                    namefield.setBounds(200,20,280,40);
                     formpanel.add(namefield);
 
                     final JTextField addressfield = new JTextField(address);
-                    addressfield.setBounds(200,70,250,40);
+                    addressfield.setBounds(200,80,280,40);
                     formpanel.add(addressfield);
 
                     final JTextField phonefield = new JTextField(phone);
-                    phonefield.setBounds(200,120,250,40);
+                    phonefield.setBounds(200,140,280,40);
                     formpanel.add(phonefield);
 
                     final JTextField agefield = new JTextField(age);
-                    agefield.setBounds(200,170,250,40);
+                    agefield.setBounds(200,200,280,40);
                     formpanel.add(agefield);
 
                     final JTextField sexfield = new JTextField(sex);
-                    sexfield.setBounds(200,220,250,40);
+                    sexfield.setBounds(200,260,280,40);
                     formpanel.add(sexfield);
 
                     final JTextField illnessfield = new JTextField(illness);
-                    illnessfield.setBounds(200,270,250,40);
+                    illnessfield.setBounds(200,320,280,40);
                     formpanel.add(illnessfield);
 
                     JButton formeditbutton = new JButton("Submit");
-                    formeditbutton.setBounds(225,320,200,40);
+                    formeditbutton.setBounds(225,400,230,40);
                     formeditbutton.setVisible(true);
                     formpanel.add(formeditbutton);
                     
@@ -143,7 +207,7 @@ class Edit
                   pstmt.setString(5, sexfield.getText());
                   pstmt.setString(6, illnessfield.getText());
                   pstmt.setInt(7, a);
-                  int count = pstmt.executeUpdate(); // execute insert statement
+                  pstmt.executeUpdate(); // execute insert statement
                   JOptionPane.showMessageDialog(null, "Successfully entered details");
                   
                   

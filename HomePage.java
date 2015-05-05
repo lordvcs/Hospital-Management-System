@@ -21,7 +21,7 @@ class HomePage
         wrapper.setLayout(null);
         wrapper.setBackground(Color.green);
 
-        //create headerpanel JPanel
+        // CREATE HEADERPANEL JPANEL
         JPanel headerpanel = new JPanel();
         headerpanel.setLayout(null);
         headerpanel.setBounds(5,5,screenSize.width-10,100);
