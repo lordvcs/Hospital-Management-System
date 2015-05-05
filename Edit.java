@@ -67,7 +67,7 @@ class Edit
                     sex = rs.getString("Sex");
                     illness = rs.getString("Illness");
 
-                    editform(name, address, phone, age, sex, illness);
+                    editform(name, address, phone, age, sex, illness, a);
 					
                 } catch (Exception e) {
                   e.printStackTrace();
@@ -84,7 +84,7 @@ class Edit
 		editframe.setVisible(true);
 	}
         
-        public void editform(String name, String address, String phone, String age, String sex, String illness)
+        public void editform(String name, String address, String phone, String age, String sex, String illness, final int a)
         {
              // EDITFORM
                     
@@ -124,16 +124,16 @@ class Edit
                     
                     
                     // SECOND ONCLICK
-                    formeditbutton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent ae)
-            {
+                formeditbutton.addActionListener(new ActionListener()
+                {
+                public void actionPerformed(ActionEvent ae)
+                {
                 PreparedStatement pstmt = null;
                 try {
                   Connection conn=DriverManager.getConnection(
                             "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
 
-                  String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
+                  String query = "UPDATE Patients SET Pname=?, Address=?, Pnumber=?, Age=?, Sex=?, Illness=? WHERE id=?";
 
                   pstmt = conn.prepareStatement(query); // create a statement
                   pstmt.setString(1, namefield.getText()); // set input parameter 1
@@ -142,7 +142,8 @@ class Edit
                   pstmt.setString(4, agefield.getText());
                   pstmt.setString(5, sexfield.getText());
                   pstmt.setString(6, illnessfield.getText());
-                  pstmt.executeUpdate(); // execute insert statement
+                  pstmt.setInt(7, a);
+                  int count = pstmt.executeUpdate(); // execute insert statement
                   JOptionPane.showMessageDialog(null, "Successfully entered details");
                   
                   
