@@ -44,8 +44,8 @@ class Edit
                     formpanel.setLayout(null);
                 
 		
-		editbutton.addActionListener(new ActionListener()
-        {
+            editbutton.addActionListener(new ActionListener()
+            {
             public void actionPerformed(ActionEvent ae)
             {
                 PreparedStatement pstmt = null;
@@ -121,6 +121,38 @@ class Edit
                     
                     editpane.setVisible(false);
                     formpanel.repaint();
+                    
+                    
+                    // SECOND ONCLICK
+                    outbutton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                PreparedStatement pstmt = null;
+                try {
+                  Connection conn=DriverManager.getConnection(
+                            "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+
+                  String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
+
+                  pstmt = conn.prepareStatement(query); // create a statement
+                  pstmt.setString(1, outname.getText()); // set input parameter 1
+                  pstmt.setString(2, outaddress.getText()); // set input parameter 2
+                  pstmt.setString(3, outnumber.getText()); // set input parameter 3
+                  pstmt.setString(4, outage.getText());
+                  pstmt.setString(5, outsex.getText());
+                  pstmt.setString(6, outillness.getText());
+                  pstmt.executeUpdate(); // execute insert statement
+                  JOptionPane.showMessageDialog(null, "Successfully entered details");
+                  new MenuPage();
+                  menupageframe.setVisible(false);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } 
+            }
+        });
+                    
+                    
         }
 	
 	public static void main(String ar[])
