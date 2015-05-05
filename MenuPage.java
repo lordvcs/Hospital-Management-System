@@ -3,6 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.plaf.LabelUI;
+
 
 class MenuPage 
 {
@@ -150,32 +152,7 @@ class MenuPage
         
         
         
-//        DefaultTableModel outpatientmodel = new DefaultTableModel();
-//        outpatientmodel.addColumn("id");   
-//        outpatientmodel.addColumn("First Name"); 
-//
-//        try{           
-//            Connection conn=DriverManager.getConnection(
-//                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-//            PreparedStatement pst = conn.prepareStatement("Select username from users");                
-//            ResultSet rs = pst.executeQuery();                        
-//            while(rs.next())
-//            {   
-//                
-//                String name = rs.getString(1);
-//                outpatientmodel.addRow(new Object[]{i, name});
-//                i++;
-//            }
-//            } 
-//        catch(Exception e){
-//            e.printStackTrace();                
-//            } 
-//        JTable outpatienttable = new JTable(outpatientmodel);
-//        JScrollPane outpatientpane = new JScrollPane(outpatienttable);
-//        outpatientpane.setBounds(100,100,500,400);
-//        panel1.add(outpatientpane);
-//        panel1.setVisible(true);
-        
+      
         
         
         // OUTPATIENT end
@@ -187,7 +164,7 @@ class MenuPage
         panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel2.setLayout(null);
         
-        i=1;
+        
         DefaultTableModel patientmodel = new DefaultTableModel();
         patientmodel.addColumn("id");   
         patientmodel.addColumn("Name");   
@@ -203,15 +180,16 @@ class MenuPage
             PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
-            {                   
+            {   
+                String id = rs.getString("id");
                 String name = rs.getString("PName");
                 String address = rs.getString("Address");
                 String phone = rs.getString("PNumber");
                 String age = rs.getString("Age");
                 String sex = rs.getString("Sex");
                 String illness = rs.getString("Illness");
-                patientmodel.addRow(new Object[]{i, name, address, phone, age, sex, illness});
-                i++;
+                patientmodel.addRow(new Object[]{id, name, address, phone, age, sex, illness});
+                
             }
             } 
         catch(Exception e){
@@ -224,20 +202,97 @@ class MenuPage
         panel2.setVisible(true);
         // PATIENT DB END
 
+        
+        
+        // DOCOTORS DB start
         JPanel panel3 = new JPanel();
         panel3.setOpaque(true);
+        panel3.setLayout(null);
         panel3.setBackground(Color.blue);
         panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+        
+        
+        
+        DefaultTableModel doctormodel = new DefaultTableModel();
+        doctormodel.addColumn("id");   
+        doctormodel.addColumn("Name");   
+        doctormodel.addColumn("Specialisation");   
+        doctormodel.addColumn("Address");   
+        doctormodel.addColumn("Phone Number");  
 
-        JPanel panel4 = new JPanel();
+        try{           
+            Connection conn=DriverManager.getConnection(
+                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+            PreparedStatement pst = conn.prepareStatement("Select * from doctors");                
+            ResultSet rs = pst.executeQuery();                        
+            while(rs.next())
+            {   
+                String id = rs.getString("id");
+                String name = rs.getString("DocName");  
+                String specialisation = rs.getString("Specialisation");
+                String address = rs.getString("Address");
+                String age = rs.getString("PNumber");
+                doctormodel.addRow(new Object[]{id, name, specialisation, address, age});
+                
+            }
+            } 
+        catch(Exception e){
+            e.printStackTrace();                
+            } 
+        JTable doctortable = new JTable(doctormodel);
+        JScrollPane doctorpane = new JScrollPane(doctortable);
+        doctorpane.setBounds(10,10,1240,550);
+        panel3.add(doctorpane);
+        panel3.setVisible(true);
+        
+        // DOCOTORS DB end
+        
+        
+
+        
+		//BILL PAYMENT JPANEL
+		//START
+		JPanel panel4 = new JPanel();
+		panel4.setLayout(null);
         panel4.setOpaque(true);
         panel4.setBackground(Color.yellow);
         panel4.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
+		JPanel bill_entry = new JPanel();
+		bill_entry.setLayout(null);
+		bill_entry.setBackground(Color.red);
+		bill_entry.setBounds(5,5,2*(screenSize.width-10)/5,screenSize.height-(screenSize.height/3));
+		
+		JTextField patient_name = new JTextField("Patient Name");
+		patient_name.setBounds(20,20,300,30);
+		
+		JTextField bill_item = new JTextField("Bill Item");
+		bill_item.setBounds(20,70,300,30);
+		
+		JTextField bill_amt = new JTextField("Bill Amount");
+		bill_amt.setBounds(20,120,300,30);
+		
+		JButton submit = new JButton("Submit");
+		submit.setBounds(100,170,75,30);
+		
+		JButton total_amt = new JButton("Total Amount");
+		total_amt.setBounds(190,170,130,30);
+		
+		panel4.add(bill_entry);
+		bill_entry.add(patient_name);
+		bill_entry.add(bill_item);
+		bill_entry.add(bill_amt);
+		bill_entry.add(submit);
+		bill_entry.add(total_amt);
 
         //add panels to tabpane
         tabpane.setTabPlacement(SwingConstants.LEFT);
-        tabpane.add(panel1,"OutPatient");
-        tabpane.add(panel2,"Patient DB");
+        
+		
+		// Create vertical labels to render tab titles
+		tabpane.add(panel1,"<html>O<br>U<br>T<br>P<br>A<br>T<br>I<br>E<br>N<br>T</html>");
+		
+        tabpane.add(panel2,"<html>P<br>A<br>T<br>I<br>E<br>N<br>T<br> <br>D<br>B</html>");
         tabpane.add(panel3,"Doctor DB");
         tabpane.add(panel4,"Bill Payment");
         
@@ -258,9 +313,4 @@ class MenuPage
         });
     }
 
-}	
-    
-		
-		
-		
-    
+}

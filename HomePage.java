@@ -174,7 +174,6 @@ class HomePage
 
     public static void main(String ar[])
     {
-                    
         new HomePage();		
     }
 	
