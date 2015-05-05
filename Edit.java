@@ -134,7 +134,7 @@ class Edit
 					
 //		Connection conn=DriverManager.getConnection("jdbc:odbc:hospital");		
                    int a = Integer.parseInt(idfield.getText());
-                  String query = "select * FROM patients WHERE id = ?";
+                  String query = "select * FROM Patients WHERE id = ?";
                   pstmt = conn.prepareStatement(query); // create a statement
                   pstmt.setInt(1, a); // set input parameter 1                  
                   ResultSet rs = pstmt.executeQuery(); // execute insert statement
