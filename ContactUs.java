@@ -76,11 +76,28 @@ public class ContactUs
         map.setBounds(7*screenSize.width/10,15,350,350);
 
         //create address JLabel
-        JLabel address = new JLabel();
-        address.setOpaque(true);
-        address.setBackground(Color.white);
-        address.setBounds(10,10,screenSize.width/3,screenSize.height/3);
-
+		String text2 = "Address : Medical College Ulloor Road, Thiruvananthapuram, Kerala 695011";
+		String text3 = "Phone No. : 9633885834";
+		String text4 = "Email ID : diabolicfreak@gmail.com";
+		JTextArea address = new JTextArea();
+		address.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
+		address.setText(text2);
+		address.append(System.getProperty("line.separator"));
+		address.append(System.getProperty("line.separator"));
+		address.append(text3);
+		address.append(System.getProperty("line.separator"));
+		address.append(System.getProperty("line.separator"));
+		address.append(text4);
+		address.append(System.getProperty("line.separator"));
+        
+        address.setBackground(new Color(0,0,0,150));
+		address.setForeground(Color.white);
+        address.setBounds(10,100,screenSize.width/3,screenSize.height/3-100);
+		address.setLineWrap(true);
+		address.setWrapStyleWord(true);
+		address.setEditable(false);
+		address.setOpaque(true);
+		
         //create email JLabel
         String text = "Your Email ID :";
 
@@ -148,7 +165,9 @@ public class ContactUs
                 }
             }
         });
-
+		
+		contactusframe.pack();
+		
         //add headerpanel
         contactusframe.add(headerpanel);
         headerpanel.add(heading);
