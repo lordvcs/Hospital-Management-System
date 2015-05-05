@@ -15,8 +15,9 @@ class Edit
 	String illness;
         
         JFrame editframe;
-        JPanel formpanel;
-        JPanel editpane;
+        JPanel formpanel, editpane, menubuttonpane;
+        JButton menubutton;
+        
                 
 	Edit()
 	{   
@@ -53,7 +54,7 @@ class Edit
             Font font1 = new Font("Garamond", Font.BOLD, 35);
             heading1.setFont(font1);
             heading1.setForeground(new Color(0, 126, 112));            
-            heading1.setBounds(screenSize.width-702,42,700,45);
+            heading1.setBounds(screenSize.width-697,43,700,45);
             
   
             
@@ -65,7 +66,7 @@ class Edit
             
             //FOOTER JPANEL
             JButton aboutus = new JButton("About Us");
-            aboutus.setBounds((screenSize.width/2)-110,650,100,30);
+            aboutus.setBounds((screenSize.width/2)-120,650,100,30);
             aboutus.addActionListener(new ActionListener()
             {
                public void actionPerformed(ActionEvent ae)
@@ -88,16 +89,26 @@ class Edit
             editpane = new JPanel();
             editpane.setLayout(null);
             editpane.setBounds(500,120,400,200);
+            
+            menubuttonpane = new JPanel();
+            menubuttonpane.setLayout(null);
+            menubuttonpane.setBounds(510,120,400,50);
 
             final JTextField idfield = new JTextField("Enter ID");
             idfield.setBounds(10,10,150,30);
             JButton editbutton = new JButton("Edit");
             editbutton.setBounds(170,10,150,30);
+            
+            menubutton = new JButton("View ");
+            menubutton.setBounds(120,10,150,30);
+            menubuttonpane.add(menubutton);
+            menubuttonpane.setVisible(false);
 
             editpane.add(idfield);
             editpane.add(editbutton);
 
             editframe.add(editpane);
+            editframe.add(menubuttonpane);
             editframe.add(panel);
             editframe.add(heading);
             editframe.add(heading1);
@@ -154,19 +165,19 @@ class Edit
                     
 
                     final JTextField namefield = new JTextField(name);
-                    namefield.setBounds(200,20,280,40);
+                    namefield.setBounds(200,60,280,40);
                     formpanel.add(namefield);
 
                     final JTextField addressfield = new JTextField(address);
-                    addressfield.setBounds(200,80,280,40);
+                    addressfield.setBounds(200,110,280,40);
                     formpanel.add(addressfield);
 
                     final JTextField phonefield = new JTextField(phone);
-                    phonefield.setBounds(200,140,280,40);
+                    phonefield.setBounds(200,160,280,40);
                     formpanel.add(phonefield);
 
                     final JTextField agefield = new JTextField(age);
-                    agefield.setBounds(200,200,280,40);
+                    agefield.setBounds(200,210,280,40);
                     formpanel.add(agefield);
 
                     final JTextField sexfield = new JTextField(sex);
@@ -174,16 +185,17 @@ class Edit
                     formpanel.add(sexfield);
 
                     final JTextField illnessfield = new JTextField(illness);
-                    illnessfield.setBounds(200,320,280,40);
+                    illnessfield.setBounds(200,310,280,40);
                     formpanel.add(illnessfield);
 
                     JButton formeditbutton = new JButton("Submit");
-                    formeditbutton.setBounds(225,400,230,40);
+                    formeditbutton.setBounds(225,380,230,40);
                     formeditbutton.setVisible(true);
                     formpanel.add(formeditbutton);
                     
                     
                     editpane.setVisible(false);
+                    menubuttonpane.setVisible(true);
                     formpanel.repaint();
                     
                     
@@ -216,9 +228,17 @@ class Edit
                 } 
             }
         });
+                
+        menubutton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                new MenuPage();
+                editframe.setVisible(false);
+            }
+        });
                     
-                    
-        }
+        }         
 	
 	public static void main(String ar[])
 	{

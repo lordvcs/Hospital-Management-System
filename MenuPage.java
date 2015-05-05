@@ -317,9 +317,3 @@ class MenuPage
 
 
 }
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8e8ada02e59bc6049a182bda8d84ea5ef79db17b
