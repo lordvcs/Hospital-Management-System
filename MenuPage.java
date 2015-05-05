@@ -3,6 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.plaf.LabelUI;
+
 
 class MenuPage 
 {
@@ -150,32 +152,7 @@ class MenuPage
         
         
         
-//        DefaultTableModel outpatientmodel = new DefaultTableModel();
-//        outpatientmodel.addColumn("id");   
-//        outpatientmodel.addColumn("First Name"); 
-//
-//        try{           
-//            Connection conn=DriverManager.getConnection(
-//                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-//            PreparedStatement pst = conn.prepareStatement("Select username from users");                
-//            ResultSet rs = pst.executeQuery();                        
-//            while(rs.next())
-//            {   
-//                
-//                String name = rs.getString(1);
-//                outpatientmodel.addRow(new Object[]{i, name});
-//                i++;
-//            }
-//            } 
-//        catch(Exception e){
-//            e.printStackTrace();                
-//            } 
-//        JTable outpatienttable = new JTable(outpatientmodel);
-//        JScrollPane outpatientpane = new JScrollPane(outpatienttable);
-//        outpatientpane.setBounds(100,100,500,400);
-//        panel1.add(outpatientpane);
-//        panel1.setVisible(true);
-        
+      
         
         
         // OUTPATIENT end
@@ -229,15 +206,50 @@ class MenuPage
         panel3.setBackground(Color.blue);
         panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
 
-        JPanel panel4 = new JPanel();
+        
+		//BILL PAYMENT JPANEL
+		//START
+		JPanel panel4 = new JPanel();
+		panel4.setLayout(null);
         panel4.setOpaque(true);
         panel4.setBackground(Color.yellow);
         panel4.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+		
+		JPanel bill_entry = new JPanel();
+		bill_entry.setLayout(null);
+		bill_entry.setBackground(Color.red);
+		bill_entry.setBounds(5,5,2*(screenSize.width-10)/5,screenSize.height-(screenSize.height/3));
+		
+		JTextField patient_name = new JTextField("Patient Name");
+		patient_name.setBounds(20,20,300,30);
+		
+		JTextField bill_item = new JTextField("Bill Item");
+		bill_item.setBounds(20,70,300,30);
+		
+		JTextField bill_amt = new JTextField("Bill Amount");
+		bill_amt.setBounds(20,120,300,30);
+		
+		JButton submit = new JButton("Submit");
+		submit.setBounds(100,170,75,30);
+		
+		JButton total_amt = new JButton("Total Amount");
+		total_amt.setBounds(190,170,130,30);
+		
+		panel4.add(bill_entry);
+		bill_entry.add(patient_name);
+		bill_entry.add(bill_item);
+		bill_entry.add(bill_amt);
+		bill_entry.add(submit);
+		bill_entry.add(total_amt);
 
         //add panels to tabpane
         tabpane.setTabPlacement(SwingConstants.LEFT);
-        tabpane.add(panel1,"OutPatient");
-        tabpane.add(panel2,"Patient DB");
+        
+		
+		// Create vertical labels to render tab titles
+		tabpane.add(panel1,"<html>O<br>U<br>T<br>P<br>A<br>T<br>I<br>E<br>N<br>T</html>");
+		
+        tabpane.add(panel2,"<html>P<br>A<br>T<br>I<br>E<br>N<br>T<br> <br>D<br>B</html>");
         tabpane.add(panel3,"Doctor DB");
         tabpane.add(panel4,"Bill Payment");
         
