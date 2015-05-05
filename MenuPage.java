@@ -127,9 +127,9 @@ class MenuPage
             {
                 PreparedStatement pstmt = null;
                 try {
-                  Connection conn=DriverManager.getConnection(
-                            "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-
+                  // Connection conn=DriverManager.getConnection(
+                            // "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+					Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
                   String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
 
                   pstmt = conn.prepareStatement(query); // create a statement
@@ -175,9 +175,10 @@ class MenuPage
         patientmodel.addColumn("Illness");   
 
         try{           
-            Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-            PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
+           // Connection conn=DriverManager.getConnection(
+             //   "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+            Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+			PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
             {   
@@ -221,8 +222,9 @@ class MenuPage
         doctormodel.addColumn("Phone Number");  
 
         try{           
-            Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+            //Connection conn=DriverManager.getConnection(
+             //   "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");  
+			Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
             PreparedStatement pst = conn.prepareStatement("Select * from doctors");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
@@ -313,8 +315,8 @@ class MenuPage
         });
     }
 
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> e39637d694ccde09da95fc6897011af62663ed9f
+
+
+

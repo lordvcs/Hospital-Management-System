@@ -13,7 +13,7 @@ public class ContactUs
 
 
         //create contactusframe Jframe
-        JFrame contactusframe = new JFrame("Contact Us");
+        final JFrame contactusframe = new JFrame("Contact Us");
         contactusframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         contactusframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contactusframe.setVisible(true);
@@ -66,6 +66,11 @@ public class ContactUs
 
         //create map image
         JLabel map = new JLabel();
+		ImageIcon icon_map = new ImageIcon("Images//map.jpg");
+        Image img_map = icon_map.getImage();
+        Image newimg_map = img_map.getScaledInstance(350, 350, Image.SCALE_SMOOTH ) ;  
+        ImageIcon logoicon_map = new ImageIcon(newimg_map);
+        map.setIcon(logoicon_map);
         map.setOpaque(true);
         map.setBackground(Color.red);
         map.setBounds(7*screenSize.width/10,15,350,350);
@@ -122,9 +127,10 @@ public class ContactUs
             {
                 try
                 {
-                    Connection conn=DriverManager.getConnection(
-                    "jdbc:ucanaccess://C://Users//Sreeram//Documents//NetBeansProjects//hms//src//Database//Hospital.accdb");     
-                    System.out.println("Connection established");
+                    // Connection conn=DriverManager.getConnection(
+                    // "jdbc:ucanaccess://C://Users//Sreeram//Documents//NetBeansProjects//hms//src//Database//Hospital.accdb");     
+                    Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+					System.out.println("Connection established");
                     PreparedStatement pst = conn.prepareStatement("insert into contactus(email,comments) values (?,?)");
                     pst.setString(1, email.getText()); 
                     pst.setString(2, comments.getText());

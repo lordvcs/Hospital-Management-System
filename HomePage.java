@@ -50,6 +50,7 @@ class HomePage
         {
            public void actionPerformed(ActionEvent ae)
            {
+			   homepageframe.setVisible(false);
                new AboutUs();
            }
         });
@@ -59,6 +60,7 @@ class HomePage
         {
             public void actionPerformed(ActionEvent ae)
             {
+				homepageframe.setVisible(false);
                 new ContactUs();
             }
         });
@@ -155,8 +157,9 @@ class HomePage
     private boolean validate_login(String username,String password)
         {
             try{           
-                Connection conn=DriverManager.getConnection(
-                    "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");     
+                // Connection conn=DriverManager.getConnection(
+                    // "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb"); 
+					Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
                 PreparedStatement pst = conn.prepareStatement("Select * from users where username=? and password=?");
                 pst.setString(1, username); 
                 pst.setString(2, password);

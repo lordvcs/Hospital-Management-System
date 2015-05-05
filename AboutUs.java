@@ -14,14 +14,14 @@ public class AboutUs
 		
 		
 		//create aboutusframe Jframe
-		JFrame aboutusframe = new JFrame("About Us");
+		final JFrame aboutusframe = new JFrame("About Us");
 		aboutusframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		aboutusframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aboutusframe.setVisible(true);
 		aboutusframe.setLayout(null);
 		
 		//create Background Image for JFrame
-		JLabel bgimage = new JLabel(new ImageIcon("Images//homer.jpg"));
+		JLabel bgimage = new JLabel(new ImageIcon("Images//aboutus.jpg"));
 		
 		aboutusframe.setContentPane(bgimage);
 		
