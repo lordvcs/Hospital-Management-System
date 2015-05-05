@@ -1,44 +1,48 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.sql.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.MatteBorder;
+import java.awt.*;
 
+public class testtable extends JFrame {
 
-public class testtable {
-    
-    
-    
-    public testtable(){
-        
-        JFrame testframe = new JFrame("Test Heading");
-        
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("First Name");        
-        
-        try{           
-            Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");     
-            PreparedStatement pst = conn.prepareStatement("Select username from users");                
-            ResultSet rs = pst.executeQuery();                        
-            while(rs.next())
-            {
-                String name = rs.getString(1);
-                model.addRow(new Object[]{name});
-            }
-            } 
-            catch(Exception e){
-            e.printStackTrace();                
-            } 
-        
-        JTable table = new JTable(model);
-        JScrollPane testpane = new JScrollPane(table);
-        testframe.add(testpane);
-        testframe.setVisible(true);
-        
+    public testtable() {
+        initializeUI();
     }
-    
-    public static void main(String ar[]){
-        new testtable();
+
+    private void initializeUI() {
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(15, 15));
+
+        JPanel top = new JPanel();
+        top.setBorder(new LineBorder(Color.RED, 1, true));
+
+        JPanel bottom = new JPanel();
+        bottom.setBorder(new BevelBorder(BevelBorder.LOWERED));
+
+        JPanel left = new JPanel();
+        left.setBorder(new EtchedBorder(EtchedBorder.RAISED));
+
+        JPanel right = new JPanel();
+        right.setBorder(new MatteBorder(5, 5, 5, 5, Color.BLUE));
+
+        JPanel center = new JPanel();
+        center.setBorder(new BevelBorder(BevelBorder.RAISED));
+
+        getContentPane().add(top, BorderLayout.NORTH);
+        getContentPane().add(bottom, BorderLayout.SOUTH);
+        getContentPane().add(left, BorderLayout.WEST);
+        getContentPane().add(right, BorderLayout.EAST);
+        getContentPane().add(center, BorderLayout.CENTER);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new testtable().setVisible(true);
+            }
+        });
     }
 }
