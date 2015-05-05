@@ -92,29 +92,47 @@ public class AboutUs
 		ImageIcon logoicon2 = new ImageIcon(newimg2);
 		founder2.setIcon(logoicon2);
 		
+		JLabel founder2name = new JLabel("Cofounder : Dr.Sreeram S");
+		founder2name.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
+		founder2name.setBackground(Color.white);
+		founder2name.setBounds(8*screenSize.width/10,270+280,250,20);
+		
 		founder2.setOpaque(true);
 		founder2.setBackground(Color.red);
 		founder2.setBounds(8*screenSize.width/10,300,250,250);
 		
 		
 		//create JLabel for AboutUs text for mainbodypanel
-		String text = "At Simpsons Military Hospital, our staff, faculty, students, volunteers and supporters are dedicated to improving the lives of people and families affected by psychiatric illness. As the largest psychiatric affiliate of Harvard Medical School, McLean has been meeting the needs of individuals and families with psychiatric illness since our founding in 1811. We are here to help you.";
-		// JLabel aboutustext = new JLabel("<html>"+text+"</html>");
+		
+		
+		String text = "OUR MISSION";
+		String text1 = "To provide the highest quality care and service for all people in the prevention, diagnosis and treatment of human illness.";
+		String text2 = "ABOUT US";
+		String text3 = "At Simpsons Military Hospital, our staff, faculty, students, volunteers and supporters are dedicated to improving the lives of people and families affected by psychiatric illness. As the largest psychiatric affiliate of Harvard Medical School, Simpsons has been meeting the needs of individuals and families with psychiatric illness since our founding in 1811. We are here to help you.";
 		
 		JTextArea aboutustext = new JTextArea();
 		aboutustext.setText(text);
+		aboutustext.append(System.getProperty("line.separator"));
+		aboutustext.append(System.getProperty("line.separator"));
+		aboutustext.append(text1);
+		aboutustext.append(System.getProperty("line.separator"));
+		aboutustext.append(System.getProperty("line.separator"));
+		aboutustext.append(text2);
+		aboutustext.append(System.getProperty("line.separator"));
+		aboutustext.append(System.getProperty("line.separator"));
+		aboutustext.append(text3);
 		aboutustext.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
 		aboutustext.setLineWrap(true);
 		aboutustext.setWrapStyleWord(true);
 		aboutustext.setEditable(false);
 		aboutustext.setOpaque(true);
 		
-		//aboutusframe.add(jtext);
+		
 		aboutustext.setBackground(new Color(255,255,255,125));
 		aboutustext.setBounds(100,100,screenSize.width/2,screenSize.height/2);
 		
 		
-		//aboutusframe.pack();
+		aboutusframe.pack();
 		
 		
 		//add headerpanel
@@ -127,6 +145,7 @@ public class AboutUs
 		mainbodypanel.add(founder1);
 		mainbodypanel.add(founder1name);
 		mainbodypanel.add(founder2);
+		mainbodypanel.add(founder2name);
 		mainbodypanel.add(aboutustext);
 		
 				
