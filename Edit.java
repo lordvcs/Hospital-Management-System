@@ -12,101 +12,156 @@ class Edit
 	String age;
 	String sex;
 	String illness;
-		
+        
+        JFrame editframe;
+        JPanel formpanel;
+        JPanel editpane;
+                
 	Edit()
 	{
-		final JFrame editframe = new JFrame("Edit");
+		JFrame editframe = new JFrame("Edit");
 		editframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         editframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		editframe.setLayout(null);
 		
-		final JPanel editpane = new JPanel();
+		editpane = new JPanel();
 		editpane.setLayout(null);
-		editpane.setBounds(5,5,600,400);
+		editpane.setBounds(5,5,900,200);
 		
 		final JTextField idfield = new JTextField("Enter ID");
-		idfield.setBounds(5,5,100,20);
+		idfield.setBounds(500,50,150,30);
 		JButton editbutton = new JButton("Edit");
-		editbutton.setBounds(5,50,100,20);
+		editbutton.setBounds(650,50,150,30);
 		
 		editpane.add(idfield);
 		editpane.add(editbutton);
 		
 		editframe.add(editpane);
+                
+                
+                    formpanel = new JPanel();
+                    formpanel.setBounds(400,250,600,900);		
+                    formpanel.setLayout(null);
+                
 		
-		
-		
-		
-		
-		editbutton.addActionListener(new ActionListener()
-        {
+            editbutton.addActionListener(new ActionListener()
+            {
             public void actionPerformed(ActionEvent ae)
             {
                 PreparedStatement pstmt = null;
                 try {
-                  // Connection conn=DriverManager.getConnection(
-                            // "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                   Connection conn=DriverManager.getConnection(
+                             "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
 					
-					Connection conn=DriverManager.getConnection(
-                            "jdbc:odbc:hospital");		
-
+//		Connection conn=DriverManager.getConnection("jdbc:odbc:hospital");		
+                   int a = Integer.parseInt(idfield.getText());
                   String query = "select * FROM patients WHERE id = ?";
                   pstmt = conn.prepareStatement(query); // create a statement
-                  pstmt.setString(1, idfield.getText()); // set input parameter 1                  
+                  pstmt.setInt(1, a); // set input parameter 1                  
                   ResultSet rs = pstmt.executeQuery(); // execute insert statement
-				  rs.next();
-					name = rs.getString("PName");
-					address = rs.getString("Address");
-					phone = rs.getString("PNumber");
-					age = rs.getString("Age");
-					sex = rs.getString("Sex");
-					illness = rs.getString("Illness");
-					
-					// EDITFORM
-					JPanel formpanel = new JPanel();
-					formpanel.setBounds(50,300,600,400);		
-					formpanel.setLayout(null);
-					
-					JTextField namefield = new JTextField(name);
-					namefield.setBounds(100,200,200,100);
-					formpanel.add(namefield);
-					
-					JTextField addressfield = new JTextField(address);
-					addressfield.setBounds(100,400,200,100);
-					formpanel.add(addressfield);
-					
-					JTextField phonefield = new JTextField(phone);
-					phonefield.setBounds(100,600,200,100);
-					formpanel.add(phonefield);
-					
-					JTextField agefield = new JTextField(age);
-					agefield.setBounds(100,800,200,100);
-					formpanel.add(agefield);
-					
-					JTextField sexfield = new JTextField(sex);
-					sexfield.setBounds(100,1000,200,100);
-					formpanel.add(sexfield);
-					
-					JTextField illnessfield = new JTextField(illness);
-					illnessfield.setBounds(100,1200,200,100);
-					formpanel.add(illnessfield);
-					
-					
-					editframe.add(formpanel);
+                    rs.next();
+                    name = rs.getString("PName");
+                    address = rs.getString("Address");
+                    phone = rs.getString("PNumber");
+                    age = rs.getString("Age");
+                    sex = rs.getString("Sex");
+                    illness = rs.getString("Illness");
+
+                    editform(name, address, phone, age, sex, illness);
 					
                 } catch (Exception e) {
                   e.printStackTrace();
                 } 
             }
         });
+                
+           editframe.add(formpanel);     
+                
+                    
 		
 		
 		
 		editframe.setVisible(true);
 	}
+        
+        public void editform(String name, String address, String phone, String age, String sex, String illness)
+        {
+             // EDITFORM
+                    
+
+                    JTextField namefield = new JTextField(name);
+                    namefield.setBounds(200,10,250,40);
+                    formpanel.add(namefield);
+
+                    JTextField addressfield = new JTextField(address);
+                    addressfield.setBounds(200,70,250,40);
+                    formpanel.add(addressfield);
+
+                    JTextField phonefield = new JTextField(phone);
+                    phonefield.setBounds(200,120,250,40);
+                    formpanel.add(phonefield);
+
+                    JTextField agefield = new JTextField(age);
+                    agefield.setBounds(200,170,250,40);
+                    formpanel.add(agefield);
+
+                    JTextField sexfield = new JTextField(sex);
+                    sexfield.setBounds(200,220,250,40);
+                    formpanel.add(sexfield);
+
+                    JTextField illnessfield = new JTextField(illness);
+                    illnessfield.setBounds(200,270,250,40);
+                    formpanel.add(illnessfield);
+
+                    JButton formeditbutton = new JButton("Submit");
+                    formeditbutton.setBounds(225,320,200,40);
+                    formeditbutton.setVisible(true);
+                    formpanel.add(formeditbutton);
+                    
+                    
+                    editpane.setVisible(false);
+                    formpanel.repaint();
+                    
+                    
+                    // SECOND ONCLICK
+                    outbutton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                PreparedStatement pstmt = null;
+                try {
+                  Connection conn=DriverManager.getConnection(
+                            "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+
+                  String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
+
+                  pstmt = conn.prepareStatement(query); // create a statement
+                  pstmt.setString(1, outname.getText()); // set input parameter 1
+                  pstmt.setString(2, outaddress.getText()); // set input parameter 2
+                  pstmt.setString(3, outnumber.getText()); // set input parameter 3
+                  pstmt.setString(4, outage.getText());
+                  pstmt.setString(5, outsex.getText());
+                  pstmt.setString(6, outillness.getText());
+                  pstmt.executeUpdate(); // execute insert statement
+                  JOptionPane.showMessageDialog(null, "Successfully entered details");
+                  new MenuPage();
+                  menupageframe.setVisible(false);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                } 
+            }
+        });
+                    
+                    
+        }
 	
 	public static void main(String ar[])
 	{
-		new Edit();
+            SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Edit();
+                
+            }});
+		
 	}
 }
