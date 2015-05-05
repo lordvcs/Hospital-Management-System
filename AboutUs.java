@@ -14,7 +14,7 @@ public class AboutUs
 		
 		
 		//create aboutusframe Jframe
-		JFrame aboutusframe = new JFrame("About Us");
+		final JFrame aboutusframe = new JFrame("About Us");
 		aboutusframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		aboutusframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aboutusframe.setVisible(true);
