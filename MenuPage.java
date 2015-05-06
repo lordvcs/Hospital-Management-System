@@ -3,6 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.plaf.LabelUI;
 
 
@@ -24,47 +26,84 @@ class MenuPage
         menupageframe.setVisible(true);
         menupageframe.setLayout(null);
 
-        //create Background Image for JFrame
-        // JLabel bgimage = new JLabel(new ImageIcon("Images//aboutus.jpg"));
-        // menupageframe.setContentPane(bgimage);
-
-
-        //create headerpanel JPanel
+      
+        // CREATE HEADERPANEL JPANEL
         JPanel headerpanel = new JPanel();
         headerpanel.setLayout(null);
-        headerpanel.setBounds(5,5,screenSize.width-10,100);
-        headerpanel.setBackground(new Color(0,0,200));
+        headerpanel.setBounds(10,10,screenSize.width-20,100);
+        //headerpanel.setBackground(Color.cyan);
+        headerpanel.setBorder(new BevelBorder(BevelBorder.RAISED)); 
+
+        // CREATE HEADERPANELSH JPANEL
+        JPanel headerpanelsh = new JPanel();
+        headerpanelsh.setLayout(null);
+        headerpanelsh.setBounds(16,16,screenSize.width-20,100);
+        headerpanelsh.setBackground(new Color(200, 200, 200));            
+
+        // CREATE HEADING JLABEL
+        JLabel heading = new JLabel("SIMPSONS MILITARY HOSPITAL");
+        Font font = new Font("Garamond", Font.BOLD, 35);
+        heading.setFont(font);
+        heading.setForeground(new Color(0, 255, 226));            
+        heading.setBounds(screenSize.width-700,30,700,45);
+
+        JLabel heading1 = new JLabel("SIMPSONS MILITARY HOSPITAL");
+        Font font1 = new Font("Garamond", Font.BOLD, 35);
+        heading1.setFont(font1);
+        heading1.setForeground(new Color(0, 126, 112));            
+        heading1.setBounds(screenSize.width-697,33,700,45);
 
 
-        //create JLabel for heading
-        JLabel heading = new JLabel("Hospital Heading");
-        heading.setFont(new Font("TimesNewRoman",Font.PLAIN,40));
-        heading.setBounds(screenSize.width-(screenSize.width/4),30,500,50);
-
-
-        //create logo button JButton
-        JButton logo = new JButton();
-        logo.setBackground(Color.black);
-        ImageIcon icon = new ImageIcon("Images\\logo.png");
-        Image img = icon.getImage();
-        Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
-        ImageIcon logoicon = new ImageIcon(newimg);
-        logo.setIcon(logoicon);
-        logo.setBounds(50,0,100,100);
-
-        logo.addActionListener(new ActionListener()
-        {
-                public void actionPerformed(ActionEvent ae)
-                {
-                        menupageframe.setVisible(false);
-                        new HomePage();
-                }
-        });
+        // LOGO
+        ImageIcon image = new ImageIcon("C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Images\\logo.png");
+        JLabel label = new JLabel("", image, JLabel.CENTER);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add( label, BorderLayout.CENTER );
+        panel.setBounds(50,5,100,90);
+        
 
         //add headerpanel
         menupageframe.add(headerpanel);
+        menupageframe.add(headerpanelsh);
         headerpanel.add(heading);
-        headerpanel.add(logo);
+        headerpanel.add(heading1);
+        headerpanel.add(panel);
+        
+        
+        //FOOTER JPANEL
+        JButton home = new JButton("Home");
+        home.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                menupageframe.setVisible(true);
+                new HomePage();
+            }
+        });
+        home.setBounds((screenSize.width/2)-140,650,100,30);
+        menupageframe.add(home);
+        JButton aboutus = new JButton("About Us");
+        aboutus.setBounds((screenSize.width/2)-40,650,100,30);
+        aboutus.addActionListener(new ActionListener()
+        {
+           public void actionPerformed(ActionEvent ae)
+           {
+               menupageframe.setVisible(true);
+               new AboutUs();
+           }
+        });
+        menupageframe.add(aboutus);
+        JButton contactus = new JButton("Contact Us");
+        contactus.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                menupageframe.setVisible(true);
+                new ContactUs();
+            }
+        });
+        contactus.setBounds((screenSize.width/2)+60,650,100,30);
+        menupageframe.add(contactus);
 
 
         //create mainbodypanel JPanel
@@ -76,12 +115,12 @@ class MenuPage
 
         //create Jtabbedpane
         JTabbedPane tabpane = new JTabbedPane();
-        tabpane.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
+        tabpane.setBounds(5,115,screenSize.width-10,screenSize.height-(screenSize.height/4));
         menupageframe.add(tabpane);
 
         // OUTPATIENT start
         JPanel panel1 = new JPanel();
-        panel1.setBackground(Color.red);
+        //panel1.setBackground(Color.red);
         panel1.setOpaque(true);
         panel1.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel1.setLayout(null);
@@ -89,24 +128,25 @@ class MenuPage
         // FORM start
         JPanel outform = new JPanel();
         outform.setLayout(null);
-        outform.setBounds(310,30,600,520);
+        outform.setBounds(410,25,450,480);
+        outform.setBorder(new EtchedBorder(EtchedBorder.RAISED)); 
         
         JLabel outlabel = new JLabel("Enter Details of Out Patient");
-        outlabel.setBounds(240,30,300,40);
+        outlabel.setBounds(140,20,300,40);
         final JTextField outname = new JTextField("Enter Name");
-        outname.setBounds(150,90,300,40);
+        outname.setBounds(80,70,300,40);
         final JTextField outaddress = new JTextField("Enter Address");
-        outaddress.setBounds(150,150,300,40);
+        outaddress.setBounds(80,120,300,40);
         final JTextField outnumber = new JTextField("Enter Phone Number");
-        outnumber.setBounds(150,210,300,40);
+        outnumber.setBounds(80,170,300,40);
         final JTextField outage = new JTextField("Enter Age");
-        outage.setBounds(150,270,300,40);
+        outage.setBounds(80,220,300,40);
         final JTextField outsex = new JTextField("Enter Sex");
-        outsex.setBounds(150,330,300,40);
+        outsex.setBounds(80,270,300,40);
         final JTextField outillness = new JTextField("Enter Illness");
-        outillness.setBounds(150,390,300,40);
+        outillness.setBounds(80,320,300,40);
         JButton outbutton = new JButton("Submit");
-        outbutton.setBounds(160,450,250,40);
+        outbutton.setBounds(100,400,250,40);
         
         outform.add(outlabel);
         outform.add(outname);
@@ -148,21 +188,26 @@ class MenuPage
                 } 
             }
         });
-        
-        
-        
-        
-      
-        
-        
+                
         // OUTPATIENT end
         
         // PATIENT DB START
         JPanel panel2 = new JPanel();
         panel2.setOpaque(true);
-        panel2.setBackground(Color.green);
+        //panel2.setBackground(Color.green);
         panel2.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         panel2.setLayout(null);
+        
+        JButton editpatient = new JButton("Edit Records");
+        editpatient.setBounds(550,15,150,40);        
+        editpatient.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+		menupageframe.setVisible(false);
+                new Edit();
+            }
+        });
         
         
         DefaultTableModel patientmodel = new DefaultTableModel();
@@ -175,9 +220,9 @@ class MenuPage
         patientmodel.addColumn("Illness");   
 
         try{           
-           // Connection conn=DriverManager.getConnection(
-             //   "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-            Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+            Connection conn=DriverManager.getConnection(
+                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+//            Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
 			PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
@@ -198,7 +243,8 @@ class MenuPage
             } 
         JTable patienttable = new JTable(patientmodel);
         JScrollPane patientpane = new JScrollPane(patienttable);
-        patientpane.setBounds(10,10,1240,550);
+        patientpane.setBounds(10,70,1240,420);
+        panel2.add(editpatient);
         panel2.add(patientpane);
         panel2.setVisible(true);
         // PATIENT DB END
@@ -209,9 +255,20 @@ class MenuPage
         JPanel panel3 = new JPanel();
         panel3.setOpaque(true);
         panel3.setLayout(null);
-        panel3.setBackground(Color.blue);
+        //panel3.setBackground(Color.blue);
         panel3.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
         
+        
+        JButton editdoctor = new JButton("Edit Records");
+        editdoctor.setBounds(550,15,150,40);
+        editdoctor.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+		menupageframe.setVisible(false);
+                new EditDoc();
+            }
+        });
         
         
         DefaultTableModel doctormodel = new DefaultTableModel();
@@ -222,9 +279,9 @@ class MenuPage
         doctormodel.addColumn("Phone Number");  
 
         try{           
-            //Connection conn=DriverManager.getConnection(
-             //   "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");  
-			Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+            Connection conn=DriverManager.getConnection(
+                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");  
+//            Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
             PreparedStatement pst = conn.prepareStatement("Select * from doctors");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
@@ -243,7 +300,8 @@ class MenuPage
             } 
         JTable doctortable = new JTable(doctormodel);
         JScrollPane doctorpane = new JScrollPane(doctortable);
-        doctorpane.setBounds(10,10,1240,550);
+        doctorpane.setBounds(10,70,1240,420);
+        panel3.add(editdoctor);
         panel3.add(doctorpane);
         panel3.setVisible(true);
         
@@ -317,8 +375,4 @@ class MenuPage
 
 
 }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 3bbeaccf0d6f7703125c55833675a9e3c6095a00

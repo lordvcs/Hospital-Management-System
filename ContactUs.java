@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
+import javax.swing.border.BevelBorder;
 
 public class ContactUs
 {
@@ -24,38 +25,76 @@ public class ContactUs
 
         contactusframe.setContentPane(bgimage);
 
-
-        //creat headerpanel JPanel
+        
+        // CREATE HEADERPANEL JPANEL
         JPanel headerpanel = new JPanel();
         headerpanel.setLayout(null);
-        headerpanel.setBounds(5,5,screenSize.width-10,100);
-        headerpanel.setBackground(new Color(0,0,0,30));
+        headerpanel.setBounds(10,10,screenSize.width-20,100);
+        //headerpanel.setBackground(Color.cyan);
+        headerpanel.setBorder(new BevelBorder(BevelBorder.RAISED)); 
 
+        // CREATE HEADERPANELSH JPANEL
+        JPanel headerpanelsh = new JPanel();
+        headerpanelsh.setLayout(null);
+        headerpanelsh.setBounds(16,16,screenSize.width-20,100);
+        headerpanelsh.setBackground(new Color(200, 200, 200));            
 
-        //create JLabel for heading
-        JLabel heading = new JLabel("Simpsons Military Hospital");
-        heading.setFont(new Font("TimesNewRoman",Font.BOLD,40));
-        heading.setBounds(screenSize.width/2,30,600,50);
+        // CREATE HEADING JLABEL
+        JLabel heading = new JLabel("SIMPSONS MILITARY HOSPITAL");
+        Font font = new Font("Garamond", Font.BOLD, 35);
+        heading.setFont(font);
+        heading.setForeground(new Color(0, 255, 226));            
+        heading.setBounds(screenSize.width-700,30,700,45);
 
-
-        //create logo button JButton
-        JButton logo = new JButton();
-        logo.setBackground(Color.black);
-        ImageIcon icon = new ImageIcon("Images//logo.png");
-        Image img = icon.getImage();
-        Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH ) ;  
-        ImageIcon logoicon = new ImageIcon(newimg);
-        logo.setIcon(logoicon);
-        logo.setBounds(50,0,100,100);
-
-        logo.addActionListener(new ActionListener()
-        {
+        JLabel heading1 = new JLabel("SIMPSONS MILITARY HOSPITAL");
+        Font font1 = new Font("Garamond", Font.BOLD, 35);
+        heading1.setFont(font1);
+        heading1.setForeground(new Color(0, 126, 112));            
+        heading1.setBounds(screenSize.width-697,33,700,45);
+            
+  
+        // LOGO
+        ImageIcon image = new ImageIcon("C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Images\\logo.png");
+        JLabel label = new JLabel("", image, JLabel.CENTER);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add( label, BorderLayout.CENTER );
+        panel.setBounds(50,5,100,90);
+        
+        
+        //FOOTER JPANEL
+            JButton home = new JButton("Home");
+            home.addActionListener(new ActionListener()
+            {
                 public void actionPerformed(ActionEvent ae)
                 {
-                        contactusframe.setVisible(false);
-                        new HomePage();
+                    contactusframe.setVisible(false);
+                    new HomePage();
                 }
-        });
+            });
+            home.setBounds((screenSize.width/2)-140,650,100,30);
+            contactusframe.add(home);
+            JButton aboutus = new JButton("About Us");
+            aboutus.setBounds((screenSize.width/2)-40,650,100,30);
+            aboutus.addActionListener(new ActionListener()
+            {
+               public void actionPerformed(ActionEvent ae)
+               {
+                   contactusframe.setVisible(false);
+                   new AboutUs();
+               }
+            });
+            contactusframe.add(aboutus);
+            JButton contactus = new JButton("Contact Us");
+            contactus.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    contactusframe.setVisible(false);
+                    new ContactUs();
+                }
+            });
+            contactus.setBounds((screenSize.width/2)+60,650,100,30);
+            contactusframe.add(contactus);
 
 
         //create mainbodypanel JPanel
@@ -170,8 +209,10 @@ public class ContactUs
 		
         //add headerpanel
         contactusframe.add(headerpanel);
+        contactusframe.add(headerpanelsh);
         headerpanel.add(heading);
-        headerpanel.add(logo);
+        headerpanel.add(heading1);
+        headerpanel.add(panel);
 
         //add mainbodypanel
         contactusframe.add(mainbodypanel);
