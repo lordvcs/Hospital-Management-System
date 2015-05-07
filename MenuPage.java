@@ -11,8 +11,30 @@ import javax.swing.plaf.LabelUI;
 class MenuPage 
 {
     JTabbedPane tabbedPane;			
-    JPanel mainbodypanel;
+    JPanel mainbodypanel, billdisplaypanel;
     int i = 1;
+    
+    JTextArea billtextarea;
+    JLabel totaldisplaylabel;
+    JTextField patient_name_label;
+    
+    // JLabel patient_name;
+    
+    
+    DefaultTableModel billtablemodel;
+    JTable billtable;
+    JScrollPane billdisplayscroll;
+    
+
+    String name;
+    String address;
+    String phone;
+    String age;
+    String sex;
+    String illness;
+    
+    int billamountint;
+    double totalsum1=0;
 
     MenuPage()
     {
@@ -166,16 +188,34 @@ class MenuPage
             public void actionPerformed(ActionEvent ae)
             {
                 PreparedStatement pstmt = null;
+                PreparedStatement billpstmt = null;
                 try {
-                  // Connection conn=DriverManager.getConnection(
-                            // "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-					Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+                   Connection conn=DriverManager.getConnection(
+                             "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+					//Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
                   String query = "insert into Patients(Pname, Address, Pnumber, Age, Sex, Illness) values(?, ?, ?, ?, ?, ?)";
+				  
+				  
+				  // FOR BILLING TABLE start
+				   Statement s = conn.createStatement();
+				   ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM Patients");
+				   r.next();
+				   int count = r.getInt("rowcount");
+				  count= count+1;				  
+				  String billquery = "CREATE TABLE patient_"+count+" " +
+                   "(id COUNTER PRIMARY KEY, " +
+                   " bill_item VARCHAR(255), " + 
+                   " billamount VARCHAR(255))";
+				  billpstmt = conn.prepareStatement(billquery);
+				  billpstmt.executeUpdate();
+				  System.out.println("Inserted into patient_id" );
+				  // FOR BILLING TABLE end
+				   
 
-                  pstmt = conn.prepareStatement(query); // create a statement
-                  pstmt.setString(1, outname.getText()); // set input parameter 1
-                  pstmt.setString(2, outaddress.getText()); // set input parameter 2
-                  pstmt.setString(3, outnumber.getText()); // set input parameter 3
+                  pstmt = conn.prepareStatement(query);
+                  pstmt.setString(1, outname.getText()); 
+                  pstmt.setString(2, outaddress.getText()); 
+                  pstmt.setString(3, outnumber.getText());
                   pstmt.setString(4, outage.getText());
                   pstmt.setString(5, outsex.getText());
                   pstmt.setString(6, outillness.getText());
@@ -209,7 +249,7 @@ class MenuPage
             }
         });
         
-        
+        i=1;
         DefaultTableModel patientmodel = new DefaultTableModel();
         patientmodel.addColumn("id");   
         patientmodel.addColumn("Name");   
@@ -218,24 +258,35 @@ class MenuPage
         patientmodel.addColumn("Phone Number");   
         patientmodel.addColumn("Sex");   
         patientmodel.addColumn("Illness");   
+        patientmodel.addColumn("Buttons");   
 
         try{           
-            Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
-//            Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+             Connection conn=DriverManager.getConnection(
+                 "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+//			Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
 			PreparedStatement pst = conn.prepareStatement("Select * from Patients");                
-            ResultSet rs = pst.executeQuery();                        
+            ResultSet rs = pst.executeQuery();       
+			// Statement s = conn.createStatement();
+			// ResultSet r = s.executeQuery("SELECT COUNT(*) AS rowcount FROM Patients");
+			// r.next();
+			// int count = r.getInt("rowcount");			
+			// System.out.println(count);
+			// JButton[] buttons = new JButton[10];
             while(rs.next())
             {   
+			
                 String id = rs.getString("id");
                 String name = rs.getString("PName");
                 String address = rs.getString("Address");
                 String phone = rs.getString("PNumber");
                 String age = rs.getString("Age");
                 String sex = rs.getString("Sex");
-                String illness = rs.getString("Illness");
+                String illness = rs.getString("Illness");				
                 patientmodel.addRow(new Object[]{id, name, address, phone, age, sex, illness});
-                
+                i++;
+				
+				
+				
             }
             } 
         catch(Exception e){
@@ -279,9 +330,9 @@ class MenuPage
         doctormodel.addColumn("Phone Number");  
 
         try{           
-            Connection conn=DriverManager.getConnection(
-                "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");  
-//            Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+             Connection conn=DriverManager.getConnection(
+                 "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");  
+            //Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
             PreparedStatement pst = conn.prepareStatement("Select * from doctors");                
             ResultSet rs = pst.executeQuery();                        
             while(rs.next())
@@ -310,57 +361,270 @@ class MenuPage
         
 
         
-		//BILL PAYMENT JPANEL
-		//START
-		JPanel panel4 = new JPanel();
-		panel4.setLayout(null);
+        //BILL PAYMENT START
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(null);
         panel4.setOpaque(true);
-        panel4.setBackground(Color.yellow);
+//        panel4.setBackground(Color.yellow);
         panel4.setBounds(5,110,screenSize.width-10,screenSize.height-(screenSize.height/4));
 		
-		JPanel bill_entry = new JPanel();
-		bill_entry.setLayout(null);
-		bill_entry.setBackground(Color.red);
-		bill_entry.setBounds(5,5,2*(screenSize.width-10)/5,screenSize.height-(screenSize.height/3));
 		
-		JTextField patient_name = new JTextField("Patient Name");
-		patient_name.setBounds(20,20,300,30);
+	// ID PANEL start	
+        JPanel billidpanel = new JPanel();
+        billidpanel.setLayout(null);
+        billidpanel.setBounds(450,10,500,50);
+
+        final JTextField billidfield = new JTextField("Enter id");
+        JButton billidbutton = new JButton("Show");
+        billidfield.setBounds(5,5,200,30);
+        billidbutton.setBounds(300,5,200,30);
+
+        billidpanel.add(billidfield);
+        billidpanel.add(billidbutton);
+	
+        // ID PANEL end
 		
-		JTextField bill_item = new JTextField("Bill Item");
-		bill_item.setBounds(20,70,300,30);
 		
-		JTextField bill_amt = new JTextField("Bill Amount");
-		bill_amt.setBounds(20,120,300,30);
+        // BILL ENTRY PANEL start
+
+        final JTextField bill_item = new JTextField("Bill Item");
+        bill_item.setBounds(140,130,300,30);
+
+        final JTextField bill_amt = new JTextField("Bill Amount");
+        bill_amt.setBounds(140,200,300,30);
+
+        JButton bill_submit = new JButton("Add");
+        bill_submit.setBounds(240,260,75,30);
+
+        JButton total_amt = new JButton("Show Total Amount");
+        total_amt.setBounds(180,320,230,30);
+
+        final JPanel billentrypanel = new JPanel();
+        billentrypanel.setLayout(null);
+        billentrypanel.setBounds(20,100,600,400);
+        billentrypanel.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 		
-		JButton submit = new JButton("Submit");
-		submit.setBounds(100,170,75,30);
 		
-		JButton total_amt = new JButton("Total Amount");
-		total_amt.setBounds(190,170,130,30);
+	bill_submit.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {  
+                PreparedStatement pstmt = null;
+                try 
+                {
+                    int a = Integer.parseInt(billidfield.getText());
+                   Connection conn=DriverManager.getConnection(
+                             "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                    //Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+                  String query = "insert into patient_"+a+"(bill_item, billamount) values(?, ?)";
+			
+                  pstmt = conn.prepareStatement(query);
+                  pstmt.setString(1, bill_item.getText()); 
+                  pstmt.setString(2, bill_amt.getText()); 
+                  
+                  pstmt.executeUpdate(); // execute insert statement
+                  
+                } catch (Exception e) 
+                {
+                  e.printStackTrace();
+                } 
+            }
+        });
+	
+        // BILL ENTRY PANEL end
+        
+        
 		
-		panel4.add(bill_entry);
-		bill_entry.add(patient_name);
-		bill_entry.add(bill_item);
-		bill_entry.add(bill_amt);
-		bill_entry.add(submit);
-		bill_entry.add(total_amt);
+        
+		
+	// BILL DISPLAY PANEL start
+        
+        
+				
+		
+        billidbutton.addActionListener(new ActionListener()
+            {
+            public void actionPerformed(ActionEvent ae)
+            {
+                try{
+                int a = Integer.parseInt(billidfield.getText());
+                Connection conn1=DriverManager.getConnection(
+   "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                //Connection conn1=DriverManager.getConnection("jdbc:odbc:hospital");
+            // FOR PATIENT NAME start
+               Statement s = conn1.createStatement();
+               ResultSet r = s.executeQuery("SELECT * FROM Patients WHERE id="+a+"");
+               r.next();
+               String patient_name = r.getString("PName");
+               String patient_age = r.getString("Age");
+               String patient_sex = r.getString("Sex");
+               
+               
+
+               patient_name_label = new JTextField("Patient Name: "+patient_name);
+               billentrypanel.add(patient_name_label);
+               patient_name_label.setBounds(20,20,150,30);
+               patient_name_label = new JTextField("Patient Age: "+patient_age);
+               billentrypanel.add(patient_name_label);
+               patient_name_label.setBounds(220,20,150,30);
+               patient_name_label = new JTextField("Patient Sex: "+patient_sex);
+               billentrypanel.add(patient_name_label);
+               patient_name_label.setBounds(420,20,150,30);
+
+                // FOR PATIENT NAME END
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                
+                
+                // BILL TABLE start
+                billtablemodel = new DefaultTableModel();
+                billtablemodel.addColumn("Bill Item");   
+                billtablemodel.addColumn("Bill Amount");                   
+				
+                PreparedStatement pstmt = null;
+                try 
+		{
+                    Connection conn=DriverManager.getConnection(
+                              "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+					
+                    //Connection conn=DriverManager.getConnection("jdbc:odbc:hospital");		
+                   int a = Integer.parseInt(billidfield.getText());
+                
+                    PreparedStatement pst = conn.prepareStatement("Select * from patient_"+a+"");                
+                    ResultSet rs = pst.executeQuery();       
+                    
+                    while(rs.next())
+                    {   
+                        
+                        String billitem = rs.getString("bill_item");
+                        String billamount = rs.getString("billamount");
+                        billtablemodel.addRow(new Object[]{billitem, billamount});
+                        
+                    }
+                    billtable = new JTable(billtablemodel);
+//                    billtablemodel.fireTableDataChanged();
+                    billdisplayscroll = new JScrollPane(billtable);
+                    billdisplayscroll.setBounds(20,20,470,280);
+                    billdisplaypanel.add(billdisplayscroll);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();                
+                } 
+                
+            }
+        });
+        
+        
+        
+        total_amt.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                billtablemodel.fireTableDataChanged();
+                billtable.repaint();
+                
+                
+                
+                 try 
+		{
+                    Connection conn=DriverManager.getConnection(
+                              "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+					
+                    //Connection conn=DriverManager.getConnection("jdbc:odbc:hospital");		
+                   int a = Integer.parseInt(billidfield.getText());
+                   
+                     Statement s = conn.createStatement();
+                     System.out.println("long before");
+                     ResultSet rs = s.executeQuery("SELECT * FROM patient_"+a+"");
+                     System.out.println("bit before");              
+                                   
+                    totalsum1 = 0;
+                    int sum1 = 0;
+//                    PreparedStatement pst = conn.prepareStatement("SELECT SUM(billamount) AS totaltt FROM patient_"+a+"");                
+//                    
+//                    ResultSet rs = pst.executeQuery(); 
+                    
+                    while(rs.next())
+                    {   
+                        
+                        System.out.println("before");
+                        
+                        String id = rs.getString("bill_item");
+                        String name = rs.getString("billamount");
+                        sum1 = Integer.parseInt(name);
+                        totalsum1 = totalsum1 +sum1;
+                    }
+
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();                
+                } 
+                String total2 = String.valueOf(totalsum1);
+                totaldisplaylabel = new JLabel();
+                totaldisplaylabel.setText("");
+                billdisplaypanel.add(totaldisplaylabel);
+                totaldisplaylabel.setText("Amount payable: "+total2);
+//                 billdisplaypanel.add(totaldisplaylabel);
+//                 totaldisplaylabel.setBounds(250,50,300,600);
+//                 totaldisplaylabel.repaint();
+                 
+                 JTextField totaltext = new JTextField();
+                 totaltext.setText("Amount payable: "+total2);
+                 billdisplaypanel.add(totaltext);
+                 totaltext.setBounds(150,300,200,30);
+                System.out.println(total2);
+                 
+            }
+        });
+        
+        billdisplaypanel = new JPanel();
+        billdisplaypanel.setLayout(null);
+        //billdisplaypanel.setBackground(Color.red);
+        panel4.add(billdisplaypanel);
+        billdisplaypanel.setBounds(700,100,500,400);
+        billdisplaypanel.setBorder(new EtchedBorder(EtchedBorder.RAISED));
+		
+
+        // BILL DISPLAY PANEL end
+
+        billentrypanel.add(bill_item);
+        billentrypanel.add(bill_amt);
+        billentrypanel.add(total_amt);
+        billentrypanel.add(bill_submit);
+
+
+
+        panel4.add(billentrypanel);
+         
+        panel4.add(billidpanel);
+		
+		//BILL PAYMENT END
+		
 
         //add panels to tabpane
         tabpane.setTabPlacement(SwingConstants.LEFT);
         
 		
-		// Create vertical labels to render tab titles
-		tabpane.add(panel1,"<html>O<br>U<br>T<br>P<br>A<br>T<br>I<br>E<br>N<br>T</html>");
-		
+	// Create vertical labels to render tab titles
+	tabpane.add(panel1,"<html>O<br>U<br>T<br>P<br>A<br>T<br>I<br>E<br>N<br>T</html>");
         tabpane.add(panel2,"<html>P<br>A<br>T<br>I<br>E<br>N<br>T<br> <br>D<br>B</html>");
-        tabpane.add(panel3,"Doctor DB");
-        tabpane.add(panel4,"Bill Payment");
+        tabpane.add(panel3,"<html>D<br>O<br>C<br>T<br>O<br>R<br> <br>D<br>B</html>");
+        tabpane.add(panel4,"<html>B<br>I<br>L<brl<br>");
         
 //        menupageframe.pack();
         
         //add mainbodypanel
         menupageframe.add(mainbodypanel);
     }
+	
+	
+	
+	
     
     public static void main(String a[])
     {
