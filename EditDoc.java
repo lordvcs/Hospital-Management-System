@@ -127,8 +127,13 @@ class EditDoc
             {
                 PreparedStatement pstmt = null;
                 try {
-                   Connection conn=DriverManager.getConnection(
-                             "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                //    Connection conn=DriverManager.getConnection(
+                //              "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/hms",
+                    "root",
+                    "root"
+                );
 					
 //		Connection conn=DriverManager.getConnection("jdbc:odbc:hospital");		
                    int a = Integer.parseInt(idfield.getText());
@@ -194,8 +199,13 @@ class EditDoc
                 {
                 PreparedStatement pstmt = null;
                 try {
-                  Connection conn=DriverManager.getConnection(
-                            "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                //   Connection conn=DriverManager.getConnection(
+                //             "jdbc:ucanaccess://C:\\Users\\diabolicfeak\\Documents\\NetBeansProjects\\hms\\src\\Database\\Hospital.accdb");     
+                Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/hms",
+                    "root",
+                    "root"
+                );
 
                   String query = "UPDATE doctors SET DocName=?, Specialisation=?, Address=?, Pnumber=? WHERE id=?";
 

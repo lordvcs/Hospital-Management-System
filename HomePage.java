@@ -5,15 +5,26 @@ import java.sql.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
-class HomePage 
-{
+class HomePage {
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost/hms";
+    static final String USER = "root";
+    static final String PASS = "root";
+    
     HomePage()
     {
+
+        try{
+            // Register JDBC Driver
+            Class.forName(JDBC_DRIVER);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         // HOME PAGE FRAME
-        final JFrame homepageframe = new JFrame("test frame");
+        final JFrame homepageframe = new JFrame("Simpsons Military Hospital");
         homepageframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
         homepageframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //homepageframe.setSize(900,900);
@@ -221,32 +232,32 @@ class HomePage
         // HOMEPAGE VISIBILITY
         homepageframe.setVisible(true);
     }
-    
-    private boolean validate_login(String username,String password)
-        {
-            try{           
-                // Connection conn=DriverManager.getConnection(
-                    // "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb"); 
-					Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
-                PreparedStatement pst = conn.prepareStatement("Select * from users where username=? and password=?");
-                pst.setString(1, username); 
-                pst.setString(2, password);
-                ResultSet rs = pst.executeQuery();                        
-                if(rs.next())            
-                    return true;    
-                else
-                    return false;            
-            }
-            catch(Exception e){
-                e.printStackTrace();
-                return false;
-            }       
-         }
 
-    public static void main(String ar[])
-    {
-        new HomePage();		
+    private boolean validate_login(String username, String password) {
+        try {
+            // Connection conn=DriverManager.getConnection(
+            // "jdbc:ucanaccess://C://Users//diabolicfeak//Documents//test.accdb");
+            // Connection conn = DriverManager.getConnection("jdbc:odbc:hospital");
+
+            // Open connection
+            System.out.println("Connecting to database...");
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pst = conn.prepareStatement("Select * from users where username=? and password=?");
+            pst.setString(1, username);
+            pst.setString(2, password);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next())
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-	
-	
+
+    public static void main(String ar[]) {
+        new HomePage();
+    }
+
 }
