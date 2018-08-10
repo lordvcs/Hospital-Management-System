@@ -116,14 +116,12 @@ public class ContactUs
 
         //create address JLabel
 		String text2 = "Address : Medical College Ulloor Road, Thiruvananthapuram, Kerala 695011";
-		String text3 = "Phone No. : 9633885834";
 		String text4 = "Email ID : diabolicfreak@gmail.com";
 		JTextArea address = new JTextArea();
 		address.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
 		address.setText(text2);
 		address.append(System.getProperty("line.separator"));
 		address.append(System.getProperty("line.separator"));
-		address.append(text3);
 		address.append(System.getProperty("line.separator"));
 		address.append(System.getProperty("line.separator"));
 		address.append(text4);

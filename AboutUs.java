@@ -73,39 +73,39 @@ public class AboutUs
 
 
         //create Founder1 image
-        JLabel founder1 = new JLabel();
+        // JLabel founder1 = new JLabel();
 
-        ImageIcon iconfounder1 = new ImageIcon("Images//founder1.jpg");
-        Image imgfounder1 = iconfounder1.getImage();
-        Image newimg1 = imgfounder1.getScaledInstance(250, 250, Image.SCALE_SMOOTH ) ;  
-        ImageIcon logoicon1 = new ImageIcon(newimg1);
-        founder1.setIcon(logoicon1);
+        // ImageIcon iconfounder1 = new ImageIcon("Images//founder1.jpg");
+        // Image imgfounder1 = iconfounder1.getImage();
+        // Image newimg1 = imgfounder1.getScaledInstance(250, 250, Image.SCALE_SMOOTH ) ;  
+        // ImageIcon logoicon1 = new ImageIcon(newimg1);
+        // founder1.setIcon(logoicon1);
 
-        JLabel founder1name = new JLabel("Cofounder : Dr.Vivek C S");
-        founder1name.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
-        founder1name.setBounds(8*screenSize.width/10,270,250,20);
+        // JLabel founder1name = new JLabel("Cofounder : Dr.Vivek C S");
+        // founder1name.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
+        // founder1name.setBounds(8*screenSize.width/10,270,250,20);
 
-        founder1.setOpaque(true);
-        founder1.setBackground(Color.red);
-        founder1.setBounds(8*screenSize.width/10,15,250,250);
+        // founder1.setOpaque(true);
+        // founder1.setBackground(Color.red);
+        // founder1.setBounds(8*screenSize.width/10,15,250,250);
 
         //create Founder2 image
-        JLabel founder2 = new JLabel();
+        // JLabel founder2 = new JLabel();
 
-        ImageIcon iconfounder2 = new ImageIcon("Images//founder2.jpg");
-        Image imgfounder2 = iconfounder2.getImage();
-        Image newimg2 = imgfounder2.getScaledInstance(250, 250, Image.SCALE_SMOOTH ) ;  
-        ImageIcon logoicon2 = new ImageIcon(newimg2);
-        founder2.setIcon(logoicon2);
+        // ImageIcon iconfounder2 = new ImageIcon("Images//founder2.jpg");
+        // Image imgfounder2 = iconfounder2.getImage();
+        // Image newimg2 = imgfounder2.getScaledInstance(250, 250, Image.SCALE_SMOOTH ) ;  
+        // ImageIcon logoicon2 = new ImageIcon(newimg2);
+        // founder2.setIcon(logoicon2);
 
-        JLabel founder2name = new JLabel("Cofounder : Dr.Sreeram S");
-        founder2name.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
-        founder2name.setBackground(Color.white);
-        founder2name.setBounds(8*screenSize.width/10,270+280,250,20);
+        // JLabel founder2name = new JLabel("Cofounder : Dr.Sreeram S");
+        // founder2name.setFont(new Font("TimesNewRoman",Font.PLAIN,20));
+        // founder2name.setBackground(Color.white);
+        // founder2name.setBounds(8*screenSize.width/10,270+280,250,20);
 
-        founder2.setOpaque(true);
-        founder2.setBackground(Color.red);
-        founder2.setBounds(8*screenSize.width/10,300,250,250);
+        // founder2.setOpaque(true);
+        // founder2.setBackground(Color.red);
+        // founder2.setBounds(8*screenSize.width/10,300,250,250);
 
 
         //create JLabel for AboutUs text for mainbodypanel
@@ -151,10 +151,10 @@ public class AboutUs
         //add mainbodypanel
         
         aboutusframe.add(mainbodypanel);
-        mainbodypanel.add(founder1);
-        mainbodypanel.add(founder1name);
-        mainbodypanel.add(founder2);
-        mainbodypanel.add(founder2name);
+        // mainbodypanel.add(founder1);
+        // mainbodypanel.add(founder1name);
+        // mainbodypanel.add(founder2);
+        // mainbodypanel.add(founder2name);
         mainbodypanel.add(aboutustext);	
 				
 		
